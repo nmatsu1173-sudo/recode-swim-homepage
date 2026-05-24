@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RECODE | パフォーマンス設計サービス</title>
+  <style>
+    /*==================================================
+      RECODE v0.1 Prototype CSS
+      - Mobile First
+      - Navy / White / Gray / Clear Water
+    ==================================================*/
+
+    :root {
+      /* Color Palette (Dark Theme) */
+      --color-heading: #FFFFFF;
+      /* Warm/Pure White for Headings */
+      --color-text-main: #E2E8F0;
+      /* Light Gray for Main Text */
+      --color-secondary: #CBD5E1;
+      /* Slate 300 - Brighter Gray for subtext */
+      --color-accent: #0EA5E9;
+      /* Clear Blue */
+      --color-bg-base: #0F172A;
+      /* Deep Navy (Main Background) */
+      --color-bg-alt: #1E293B;
+      /* Slate 800 (Alternate Section Background) */
+      --color-border: #334155;
+      /* Slate 700 for Borders */
+
+      /* Typography */
+      --font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      --line-height-base: 1.7;
+      --letter-spacing-base: 0.04em;
+    }
+
+    /* Reset & Base Settings */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+      color: var(--color-text-main);
+      background-color: var(--color-bg-base);
+      line-height: var(--line-height-base);
+      letter-spacing: var(--letter-spacing-base);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /*==================================================
+      Typography & Layout
+    ==================================================*/
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.4;
+      font-weight: 600;
+      color: var(--color-heading);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+      padding-bottom: 1.25rem;
+      letter-spacing: 0.08em;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 2px;
+      background-color: var(--color-accent);
+      opacity: 0.6;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--color-secondary);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      /* Readability on PC */
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 3.5rem 0;
+      /* Mobile padding */
+    }
+
+    .bg-alt {
+      background-color: var(--color-bg-alt);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /*==================================================
+      Components
+    ==================================================*/
+
+    /* About Section (RECODEとは) */
+    .about-section p {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      padding: 0 0.75rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 2rem;
+      background-color: var(--color-bg-base);
+    }
+
+    .hero-slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: heroSlideshowAnim 15s infinite;
+      filter: brightness(0.48) contrast(1.05) saturate(0.85);
+    }
+
+    .hero-slide:nth-child(1) {
+      background-image: url('assets/images/hero_swim_1.png');
+      animation-delay: 0s;
+    }
+
+    .hero-slide:nth-child(2) {
+      background-image: url('assets/images/hero_swim_2.png');
+      animation-delay: 5s;
+    }
+
+    .hero-slide:nth-child(3) {
+      background-image: url('assets/images/hero_swim_3.png');
+      animation-delay: 10s;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.15) 0%, rgba(15, 23, 42, 0.65) 100%);
+      z-index: 2;
+    }
+
+    @keyframes heroSlideshowAnim {
+      0% {
+        opacity: 0;
+        transform: scale(1.02);
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      33% {
+        opacity: 1;
+      }
+
+      41% {
+        opacity: 0;
+        transform: scale(1.06);
+      }
+
+      100% {
+        opacity: 0;
+      }
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      margin-bottom: 3.5rem;
+      color: var(--color-primary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 0.5rem;
+      text-shadow: 0 2px 10px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-logo-img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 5px rgba(15, 23, 42, 0.9));
+    }
+
+    .hero-catch {
+      font-size: 1.8rem;
+      /* Mobile font size */
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      line-height: 1.6;
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 10px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #CBD5E1;
+      font-weight: 500;
+      text-shadow: 0 2px 10px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: #94A3B8;
+      text-shadow: 0 2px 10px rgba(15, 23, 42, 0.9);
+    }
+
+    /* Blueprint visual element inside Hero */
+    .hero-blueprint {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px dashed rgba(14, 165, 233, 0.25);
+      border-radius: 6px;
+      padding: 1.25rem 0.75rem 0.5rem;
+      margin: 2rem 0;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      position: relative;
+    }
+
+    .hero-blueprint-title {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: rgba(14, 165, 233, 0.65);
+      letter-spacing: 0.15em;
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 3px rgba(15, 23, 42, 0.9);
+    }
+
+    .blueprint-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Sub-CTA Link below main button */
+    .hero-sub-cta-wrap {
+      margin-top: 1.25rem;
+    }
+
+    .hero-sub-cta {
+      font-size: 0.85rem;
+      color: #CBD5E1;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(203, 213, 225, 0.35);
+      padding-bottom: 2px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      letter-spacing: 0.03em;
+      display: inline-block;
+      text-shadow: 0 1px 5px rgba(15, 23, 42, 0.9);
+    }
+
+    .hero-sub-cta:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    /* Pain Points (悩みのリスト) */
+    .pain-list {
+      list-style: none;
+    }
+
+    .pain-item {
+      background: var(--color-bg-base);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 3px solid var(--color-accent);
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .pain-item p {
+      margin-bottom: 0;
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+
+    /* Features (できること・やらないこと) */
+    .feature-box {
+      background: var(--color-bg-base);
+      border: 1px solid var(--color-border);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 4px;
+    }
+
+    .feature-box.anti {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(203, 213, 225, 0.3);
+    }
+
+    .feature-box h3 {
+      font-size: 1.1rem;
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-box.anti h3 {
+      color: var(--color-text-main);
+    }
+
+    .feature-box ul {
+      list-style: none;
+    }
+
+    .feature-box li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--color-secondary);
+    }
+
+    .feature-box.anti li {
+      color: var(--color-text-main);
+    }
+
+    .feature-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .feature-box li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+
+    .feature-box.anti li::before {
+      content: "×";
+      color: var(--color-secondary);
+    }
+
+    /* Target */
+    .target-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .target-card {
+      padding: 1.5rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-alt);
+      text-align: center;
+      font-weight: 500;
+      color: var(--color-primary);
+      border-radius: 4px;
+    }
+
+    /* Profile */
+    .profile-card {
+      padding: 2rem 1.5rem;
+      background: var(--color-bg-base);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .profile-images {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-photo-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .profile-photo-main {
+      width: 260px;
+      height: 340px;
+      max-width: 100%;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-base);
+    }
+
+    .profile-caption {
+      font-size: 0.8rem;
+      color: var(--color-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    .profile-origin-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .profile-origin-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0;
+    }
+
+    .profile-photo-origin {
+      width: 280px;
+      max-width: 100%;
+      height: auto;
+      border-radius: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.8;
+    }
+
+    .profile-caption-origin {
+      font-size: 0.85rem;
+      color: var(--color-secondary);
+      letter-spacing: 0.05em;
+      margin-top: 0.2rem;
+    }
+
+    .profile-name {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      color: var(--color-heading);
+      letter-spacing: 0.05em;
+    }
+
+    .profile-name-en {
+      font-size: 0.85rem;
+      color: var(--color-secondary);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .profile-title {
+      font-size: 0.9rem;
+      color: var(--color-text-main);
+      opacity: 0.9;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+
+    .profile-text {
+      text-align: left;
+      font-size: 0.95rem;
+      margin-top: 1.25rem;
+      margin-bottom: 0;
+    }
+
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding-bottom: 1.5rem;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .faq-q {
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 2rem;
+      color: var(--color-heading);
+      line-height: 1.6;
+    }
+
+    .faq-q::before {
+      content: "Q.";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .faq-a {
+      padding-left: 2rem;
+      margin-bottom: 0;
+      position: relative;
+      color: var(--color-text-main);
+      line-height: var(--line-height-base);
+    }
+
+    .faq-a::before {
+      content: "A.";
+      position: absolute;
+      left: 0;
+      color: var(--color-secondary);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background-color: var(--color-bg-alt);
+      color: var(--color-primary);
+      text-align: center;
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .cta-section h2 {
+      color: var(--color-primary);
+    }
+
+    .cta-section p {
+      color: #CBD5E1;
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: var(--color-heading);
+      text-decoration: none;
+      padding: 1rem 1rem;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+      letter-spacing: 0.05em;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+      opacity: 0.9;
+    }
+
+    .cta-note {
+      font-size: 0.75rem;
+      color: #94A3B8;
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
+
+    /* Flow Section */
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .flow-card {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      padding: 1.25rem 1.5rem;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .flow-arrow {
+      height: 24px;
+      width: 1px;
+      background: var(--color-border);
+      opacity: 0.6;
+    }
+
+    .flow-step {
+      color: var(--color-accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .flow-title {
+      font-size: 1.05rem;
+      color: var(--color-heading);
+      margin-bottom: 0.6rem;
+      font-weight: 600;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    .flow-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-main);
+      margin-bottom: 0;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 0;
+      background-color: var(--color-bg-base);
+      color: var(--color-secondary);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* Operator Intro Section (短い運営者紹介) */
+    .operator-intro {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1.5rem 1.25rem;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg-alt);
+      border-radius: 6px;
+      margin-top: 1.5rem;
+    }
+
+    .operator-intro-avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-accent);
+      margin-bottom: 1rem;
+      flex-shrink: 0;
+    }
+
+    .operator-intro-content {
+      flex: 1;
+    }
+
+    .operator-intro-heading {
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+    }
+
+    .operator-intro-title {
+      font-size: 1.1rem;
+      color: var(--color-heading);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .operator-intro-text {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--color-text-main);
+      margin-bottom: 0;
+      text-align: left;
+    }
+
+    /* Performance Design Flow Diagram (流れ図解) */
+    .diagram-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 540px;
+      margin: 2.5rem auto 0;
+      position: relative;
+    }
+
+    .diagram-item {
+      display: flex;
+      gap: 1.25rem;
+      position: relative;
+      padding-bottom: 1.5rem;
+    }
+
+    .diagram-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .diagram-item::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 36px;
+      bottom: 0;
+      width: 1px;
+      background: var(--color-border);
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    .diagram-item:last-child::before {
+      display: none;
+    }
+
+    .diagram-icon-container {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-accent);
+      flex-shrink: 0;
+      z-index: 2;
+      box-shadow: 0 0 10px rgba(15, 23, 42, 0.5);
+    }
+
+    .diagram-icon-container svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+    }
+
+    .diagram-content-box {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 1.25rem;
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .diagram-step-title {
+      font-size: 1.05rem;
+      color: var(--color-heading);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .diagram-step-title .diagram-step-tag {
+      font-size: 0.75rem;
+      color: var(--color-accent);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .diagram-step-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--color-text-main);
+      margin: 0;
+    }
+
+    /* Mid-page CTA Section (中盤CTA) */
+    .mid-cta-section {
+      padding: 3.5rem 0;
+      background-color: var(--color-bg-base);
+    }
+
+    .mid-cta-card {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 2.25rem 1.5rem;
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .mid-cta-card h3 {
+      font-size: 1.2rem;
+      color: var(--color-heading);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .mid-cta-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-secondary);
+      margin-bottom: 0;
+    }
+
+    /*==================================================
+      Responsive Adjustments (PC & Tablet)
+    ==================================================*/
+    @media (min-width: 768px) {
+      body {
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 3.5rem;
+      }
+
+      section {
+        padding: 6rem 0;
+      }
+
+      .about-section p {
+        font-size: inherit;
+        line-height: inherit;
+        padding: 0;
+      }
+
+      .feature-box {
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .profile-card {
+        padding: 2.5rem 2rem;
+      }
+
+      .faq-item {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+      }
+
+      .hero {
+        min-height: 85vh;
+        padding-top: 3rem;
+      }
+
+      .hero-catch {
+        font-size: 2.5rem;
+      }
+
+      .hero-sub {
+        font-size: 1.25rem;
+      }
+
+      .cta-section {
+        padding: 6rem 0;
+      }
+
+      .btn {
+        display: inline-block;
+        width: auto;
+        max-width: none;
+        padding: 1.25rem 3.5rem;
+        font-size: 1.1rem;
+        letter-spacing: 0.08em;
+      }
+
+      .target-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Responsive Operator Intro */
+      .operator-intro {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        padding: 2.25rem 2rem;
+        gap: 1.75rem;
+      }
+
+      .operator-intro-avatar {
+        width: 86px;
+        height: 86px;
+        margin-bottom: 0;
+      }
+
+      /* Responsive Mid CTA */
+      .mid-cta-section {
+        padding: 5rem 0;
+      }
+
+      .mid-cta-card {
+        padding: 3.25rem 2.5rem;
+      }
+
+      .mid-cta-card h3 {
+        font-size: 1.45rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. ファーストビュー -->
+  <section class="hero">
+    <div class="hero-slideshow">
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-logo">
+        <img src="assets/images/recode_logo_mark_white.png" alt="RECODE" class="hero-logo-img">
+        <span>RECODE</span>
+      </div>
+
+      <h1 class="hero-catch">
+        目標までの練習に、<br>
+        自分専用の設計図を。
+      </h1>
+
+      <p class="hero-sub">
+        現在地を整理し、<br>
+        限られた時間の中で、今やるべき練習と積み上げ方を整える。
+      </p>
+
+      <!-- 設計図ビジュアル要素 (PERFORMANCE DESIGN SYSTEM) -->
+      <div class="hero-blueprint">
+        <div class="hero-blueprint-title">PERFORMANCE DESIGN SYSTEM</div>
+        <svg viewBox="0 0 500 80" class="blueprint-svg" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid background (subtle blueprint feeling) -->
+          <defs>
+            <pattern id="blueprint-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+              <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(14, 165, 233, 0.08)" stroke-width="0.5" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#blueprint-grid)" rx="4" />
+
+          <!-- Connecting line -->
+          <path d="M 50 40 L 450 40" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1.5" />
+          <!-- Active flow highlights -->
+          <path d="M 50 40 L 250 40" fill="none" stroke="var(--color-accent)" stroke-width="1.5"
+            stroke-dasharray="4 2" />
+
+          <!-- Feedback loop (Adjust -> Design) -->
+          <path d="M 450 40 C 450 70, 250 70, 250 45" fill="none" stroke="rgba(14, 165, 233, 0.4)" stroke-width="1"
+            stroke-dasharray="3 3" marker-end="url(#arrow)" />
+
+          <!-- Marker for feedback arrow -->
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6"
+              orient="auto-start-reverse">
+              <path d="M 0 2 L 6 5 L 0 8 z" fill="rgba(14, 165, 233, 0.6)" />
+            </marker>
+          </defs>
+
+          <!-- Nodes (circles) -->
+          <!-- Node 1: 目標 -->
+          <circle cx="50" cy="40" r="4" fill="#FFF" stroke="var(--color-accent)" stroke-width="1.5" />
+          <text x="50" y="22" font-size="9" fill="rgba(255,255,255,0.6)" font-weight="600" text-anchor="middle"
+            letter-spacing="0.05em">目標</text>
+
+          <!-- Node 2: 現在地 -->
+          <circle cx="150" cy="40" r="4" fill="#FFF" stroke="var(--color-accent)" stroke-width="1.5" />
+          <text x="150" y="22" font-size="9" fill="rgba(255,255,255,0.6)" font-weight="600" text-anchor="middle"
+            letter-spacing="0.05em">現在地</text>
+
+          <!-- Node 3: 設計 -->
+          <circle cx="250" cy="40" r="6" fill="var(--color-accent)" stroke="#FFF" stroke-width="1.5" />
+          <text x="250" y="22" font-size="10" fill="var(--color-accent)" font-weight="700" text-anchor="middle"
+            letter-spacing="0.05em">設計図</text>
+
+          <!-- Node 4: 実施 -->
+          <circle cx="350" cy="40" r="4" fill="#FFF" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+          <text x="350" y="22" font-size="9" fill="rgba(255,255,255,0.4)" font-weight="600" text-anchor="middle"
+            letter-spacing="0.05em">実施</text>
+
+          <!-- Node 5: 調整 -->
+          <circle cx="450" cy="40" r="4" fill="#FFF" stroke="rgba(255,255,255,0.4)" stroke-width="1" />
+          <text x="450" y="22" font-size="9" fill="rgba(255,255,255,0.4)" font-weight="600" text-anchor="middle"
+            letter-spacing="0.05em">調整</text>
+        </svg>
+      </div>
+
+      <p class="hero-desc">
+        RECODEは、<br>
+        マスターズスイマーのための<br>
+        練習設計サポートです。
+      </p>
+
+      <div style="margin-top: 2.5rem;">
+        <!-- 
+          【LINE公式アカウント URL設定箇所 1】
+          以下の href の "#" を、LINE公式アカウントのURL（例: https://lin.ee/xxxxxxx）に差し替えてください。
+          ※すべてのLINEボタンはこのURLに統一します。
+        -->
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn">LINEで現在地を相談する</a>
+        <div class="hero-sub-cta-wrap">
+          <a href="#" class="hero-sub-cta">相談前に、3つの質問で現在地を整理する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1.5 運営者メッセージミニブロック -->
+  <section style="padding: 2.5rem 0 1.5rem;">
+    <div class="container">
+      <div class="operator-intro">
+        <img src="assets/images/recode_operator_current.png" alt="松下 典功" class="operator-intro-avatar">
+        <div class="operator-intro-content">
+          <span class="operator-intro-heading">実践者として、伴走する。</span>
+          <h3 class="operator-intro-title">松下 典功（Norikatsu Matsushita） <span
+              style="font-size: 0.85rem; font-weight: normal; color: var(--color-secondary);">/ RECODE運営者</span></h3>
+          <p class="operator-intro-text">
+            仕事と競技を両立し、マスターズ水泳日本一、世界大会5位入賞を果たした実践から、RECODEは生まれました。大人世代の限られた時間と環境の中で、どうすれば迷いなく積み上げられるか。実践者の視点から、あなたの現在地を共に整理します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1.6 RECODEの流れ図解 -->
+  <section style="padding: 2.5rem 0 3.5rem;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 1rem;">パフォーマンス設計の流れ</h2>
+      <p class="text-center"
+        style="margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; font-size: 0.95rem; line-height: 1.6; color: var(--color-secondary);">
+        目標と現在地を線で結び、ログを活かして週ごとに調整しながら積み上げます。
+      </p>
+
+      <div class="diagram-list">
+        <!-- STEP 1 -->
+        <div class="diagram-item">
+          <div class="diagram-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+          </div>
+          <div class="diagram-content-box">
+            <h4 class="diagram-step-title">
+              目標の明確化
+              <span class="diagram-step-tag">STEP 1</span>
+            </h4>
+            <p class="diagram-step-desc">出場大会、目指す記録、達成したい姿などの「ゴール」を明確にします。</p>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="diagram-item">
+          <div class="diagram-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+            </svg>
+          </div>
+          <div class="diagram-content-box">
+            <h4 class="diagram-step-title">
+              現在地の棚卸し
+              <span class="diagram-step-tag">STEP 2</span>
+            </h4>
+            <p class="diagram-step-desc">練習できる環境、週の回数、現在の課題や痛みの有無などの「現在地」を整理します。</p>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="diagram-item">
+          <div class="diagram-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+          </div>
+          <div class="diagram-content-box">
+            <h4 class="diagram-step-title">
+              メニュー設計
+              <span class="diagram-step-tag">STEP 3</span>
+            </h4>
+            <p class="diagram-step-desc">目標と現在地を結び、限られた時間の中で最優先で取り組むべきカスタムメニューを構築します。</p>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="diagram-item">
+          <div class="diagram-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 12h5l2 7 4-14 3 10 3-5h5"></path>
+            </svg>
+          </div>
+          <div class="diagram-content-box">
+            <h4 class="diagram-step-title">
+              自主練習の実施
+              <span class="diagram-step-tag">STEP 4</span>
+            </h4>
+            <p class="diagram-step-desc">設計図に沿ってご自身で練習を重ねます。チームやスクールに通っている場合も補完として機能します。</p>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="diagram-item">
+          <div class="diagram-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+          </div>
+          <div class="diagram-content-box">
+            <h4 class="diagram-step-title">
+              振り返りと微調整
+              <span class="diagram-step-tag">STEP 5</span>
+            </h4>
+            <p class="diagram-step-desc">日々のログ内容から毎週の振り返りを行い、翌週のメニューへフィードバックして微調整します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 一人練習者の悩み -->
+  <section class="bg-alt">
+    <div class="container">
+      <h2>こんな迷いはありませんか？</h2>
+      <ul class="pain-list">
+        <li class="pain-item">
+          <p>目標はあるが、今の練習が合っているか不安</p>
+        </li>
+        <li class="pain-item">
+          <p>情報が多くて、何を優先すべきか分からない</p>
+        </li>
+        <li class="pain-item">
+          <p>チームやスクールだけでは、自分用の調整が足りない</p>
+        </li>
+        <li class="pain-item">
+          <p>混雑したプールでも、できる練習を組み立てたい</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. RECODEとは -->
+  <section class="about-section">
+    <div class="container">
+      <h2>RECODEとは</h2>
+      <p>
+        RECODEは、細かなフォーム修正そのものを主目的にしたサービスではありません。
+      </p>
+      <p>
+        目標に向けて、今の自分はどこにいて、何を優先して積み上げるべきか。<br>
+        そこを一緒に整理しながら、練習の進め方を設計していくサポートです。
+      </p>
+      <p>
+        練習メニュー、日々のログ、週ごとの振り返りを通して、限られた時間と環境の中でも、目標につながる練習を続けられる状態をつくります。
+      </p>
+      <p>
+        RECODEでは、この流れを「パフォーマンス設計」として大切にしています。
+      </p>
+    </div>
+  </section>
+
+  <!-- 4. RECODEでできること / 5. やらないこと -->
+  <section class="bg-alt">
+    <div class="container">
+      <h2>サービスの特徴</h2>
+
+      <div class="feature-box">
+        <h3>RECODEで整えること</h3>
+        <ul>
+          <li>目標に向けた現在地と課題の整理</li>
+          <li>環境に合わせた練習メニューの設計</li>
+          <li>練習ログを活かした週ごとの調整</li>
+          <li>混雑プールでも続けやすい練習代替案</li>
+        </ul>
+      </div>
+
+      <div class="feature-box anti">
+        <h3>RECODEが主目的にしないこと</h3>
+        <ul>
+          <li>「誰でもすぐに速くなる」といった結果保証</li>
+          <li>対面での細かなフォーム修正だけを目的にした指導</li>
+          <li>振り返りのない、一方通行のメニュー提供</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 中盤CTA -->
+  <section class="mid-cta-section">
+    <div class="container">
+      <div class="mid-cta-card">
+        <h3>迷いをなくし、今やるべき練習を明確にするために。</h3>
+        <p>
+          目標に向けた最適な練習プランを一緒に整理しましょう。<br>
+          ご相談から設計の開始まで、すべてオンライン（LINE）で完結します。
+        </p>
+        <div style="margin-top: 1.75rem;">
+          <!-- 
+            【LINE公式アカウント URL設定箇所 3】
+            以下の href の "#" を、LINE公式アカウントのURLに差し替えてください。
+          -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn">LINEで現在地を相談する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 対象者 -->
+  <section>
+    <div class="container">
+      <h2>主な対象者</h2>
+      <p class="text-center" style="margin-bottom: 2rem;">
+        目標に向けて、水泳を積み上げたい方のためのサービスです。
+      </p>
+      <div class="target-list">
+        <div class="target-card">マスターズスイマー</div>
+        <div class="target-card">一人で練習に取り組んでいる方</div>
+        <div class="target-card">目標に向けた練習の進め方を整理したい方</div>
+        <div class="target-card">40代以降で記録に再挑戦したい方</div>
+        <div class="target-card">混雑プール等の環境で工夫して練習する方</div>
+        <div class="target-card">目標大会・検定に向けて準備する方</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flow (ご相談からの流れ) -->
+  <section>
+    <div class="container">
+      <h2>ご相談からの流れ</h2>
+      <p class="text-center" style="margin-bottom: 1.5rem;">
+        はじめから申し込みを前提にする必要はありません。<br>
+        まずは、今の目標と練習の迷いを整理するところから始めます。
+      </p>
+      <p class="text-center" style="font-size: 0.95rem; margin-bottom: 2.5rem; color: var(--color-secondary);">
+        相談 → 整理 → 提案 → 積み上げ。<br>
+        この流れで進みます。
+      </p>
+      <div class="flow-list">
+        <div class="flow-card">
+          <span class="flow-step">STEP 1</span>
+          <h3 class="flow-title">LINEで相談</h3>
+          <p class="flow-desc">目標や大会、今の練習状況を送る</p>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-card">
+          <span class="flow-step">STEP 2</span>
+          <h3 class="flow-title">現在地を整理</h3>
+          <p class="flow-desc">練習環境、回数、課題を一緒に確認する</p>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-card">
+          <span class="flow-step">STEP 3</span>
+          <h3 class="flow-title">進め方を提案</h3>
+          <p class="flow-desc">必要に応じて、合うサポート内容を案内する</p>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-card">
+          <span class="flow-step">STEP 4</span>
+          <h3 class="flow-title">練習設計を開始</h3>
+          <p class="flow-desc">メニューとログで、練習を積み上げる</p>
+        </div>
+      </div>
+      <p class="text-center" style="font-size: 0.85rem; color: var(--color-secondary); margin-top: 2rem;">
+        まずは整理だけでも大丈夫です。必要な場合のみ、合う進め方をご案内します。
+      </p>
+    </div>
+  </section>
+
+  <!-- 7. 運営者プロフィール -->
+  <section class="bg-alt">
+    <div class="container">
+      <h2>運営者</h2>
+      <div class="profile-card">
+        <div class="profile-images">
+          <!-- 現在の運営者写真 -->
+          <div class="profile-photo-wrapper">
+            <img src="assets/images/recode_operator_current.png" alt="現在の松下" class="profile-photo-main">
+            <div class="profile-caption">2023年 世界マスターズ福岡にて</div>
+          </div>
+
+
+        </div>
+        <div class="profile-name">松下 典功</div>
+        <div class="profile-name-en">Norikatsu Matsushita</div>
+        <div class="profile-title">RECODE運営者 / マスターズスイマー</div>
+        <p class="profile-text">
+          RECODEを運営する松下典功は、マスターズ水泳で日本一、世界大会5位入賞を経験し、現在も記録更新に挑戦しているマスターズスイマーです。<br><br>
+          仕事と競技を両立しながら、自身の練習・食事・睡眠・ログ分析も研究対象として、目標から逆算した練習設計を実践し続けています。<br><br>
+          机上の理論ではなく、限られた時間と環境の中でどう積み上げるかを、実践者の視点から一緒に整理します。
+        </p>
+
+        <!-- 原点写真 -->
+        <div class="profile-origin-wrapper">
+          <div class="profile-origin-heading">原点の一枚</div>
+          <img src="assets/images/recode_operator_origin.jpg" alt="競技の原点" class="profile-photo-origin">
+          <div class="profile-caption-origin">水泳は、積み上げ方を学んできた原点です。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. FAQ -->
+  <section>
+    <div class="container">
+      <h2>よくあるご質問</h2>
+
+      <div class="faq-item">
+        <div class="faq-q">フォームの動画を送ることはできますか？</div>
+        <div class="faq-a">はい。必要に応じて、現在地を整理するための参考材料として活用します。ただし、RECODEは細かなフォーム添削そのものを主目的とするサービスではありません。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">週に何回練習できれば対象になりますか？</div>
+        <div class="faq-a">回数に決まりはありません。週1回でも、その1回を目標につながる練習にするための組み立て方を一緒に整理します。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">チーム練習やスクールに通っていても利用できますか？</div>
+        <div class="faq-a">はい。チームやスクールでの練習を否定するものではありません。自分の目標に合わせて、何を補い、どう積み上げるかを整理したい方に向いています。</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">相談だけでも大丈夫ですか？</div>
+        <div class="faq-a">はい。まずは現在地や課題を整理するだけでも構いません。必要に応じて、合う進め方をご案内します。</div>
+      </div>
+
+      <!-- 
+        【FAQ 追加用テンプレート】
+        将来的に項目を増やす場合は、上の <div class="faq-item"> 〜 </div> をコピーして、
+        ここに貼り付け、中の質問文（.faq-q）と回答文（.faq-a）を書き換えてください。
+      -->
+
+    </div>
+  </section>
+
+  <!-- 8 & 10. CTA (LINE登録導線) -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>まずは、現在地の整理から。</h2>
+      <p>
+        目標や練習の迷いがある方は、<br>
+        公式LINEよりご相談ください。<br>
+        今の現在地と、次に整えるべきことを一緒に整理します。
+      </p>
+      <!-- 
+        【LINE公式アカウント URL設定箇所 2】
+        以下の href の "#" を、LINE公式アカウントのURLに差し替えてください。
+      -->
+      <a href="#" target="_blank" rel="noopener noreferrer" class="btn">LINEで現在地を相談する</a>
+      <p class="cta-note">※まずは整理だけでも大丈夫です。</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      &copy; RECODE All rights reserved.
+    </div>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RECODE | パフォーマンス設計サービス</title>
+      <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      /* Color Palette (Sincere Light Theme) */
+      --color-heading: #1E293B; /* Deep Navy */
+      --color-text-main: #334155; /* Slate 700 */
+      --color-secondary: #475569; /* Slate 600 */
+      --color-accent: #0284C7; /* Sincere Swimming Blue */
+      --color-accent-light: #E0F2FE; /* Sky 100 for light backgrounds */
+      --color-primary: #FFFFFF;
+      --color-bg-base: #FFFFFF;
+      --color-bg-alt: #F8FAFC; /* Slate 50 */
+      --color-border: #E2E8F0; /* Slate 200 */
+
+      /* Typography */
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      --line-height-base: 1.85;
+      --letter-spacing-base: 0.05em;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 1.05rem;
+      color: var(--color-text-main);
+      background-color: var(--color-bg-base);
+      line-height: var(--line-height-base);
+      letter-spacing: var(--letter-spacing-base);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    .highlight {
+      font-weight: 700;
+      color: var(--color-heading);
+      background: linear-gradient(transparent 65%, var(--color-accent-light) 65%);
+      padding: 0 0.2em;
+    }
+
+    .highlight-white {
+      font-weight: 700;
+      color: var(--color-heading);
+      background: linear-gradient(transparent 65%, var(--color-accent-light) 65%);
+      padding: 0 0.2em;
+    }
+
+    @media (min-width: 768px) { .sp-only { display: none; } }
+    .ib { display: inline-block; }
+    .nowrap { display: inline-block; white-space: nowrap; }
+
+    h1, h2, h3, h4 {
+      line-height: 1.4;
+      font-weight: 700;
+      color: var(--color-heading);
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 3.5rem;
+      text-align: center;
+      position: relative;
+      letter-spacing: 0.08em;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background-color: var(--color-accent);
+      border-radius: 2px;
+    }
+
+    h3 { font-size: 1.35rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1.5rem; color: var(--color-secondary); }
+
+    .container { width: 100%; max-width: 800px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
+    section { padding: 5rem 0; position: relative; }
+
+    /* Clean Background Sections */
+    .bg-carbon, .bg-alt-light, .bg-alt {
+      background-color: var(--color-bg-alt);
+      color: var(--color-text-main);
+      padding: 5rem 0;
+      margin: 0;
+      z-index: 1;
+      clip-path: none;
+    }
+    
+    .bg-carbon h2, .bg-alt h2, .bg-alt-light h2 { color: var(--color-heading); }
+    .bg-carbon p, .bg-alt p, .bg-alt-light p { color: var(--color-secondary); }
+
+    .text-center { text-align: center; }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      background: var(--color-accent);
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 1.25rem 2rem;
+      border-radius: 8px; /* Sincere rounded corners */
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.3);
+      background: #0369A1; /* Slightly darker blue on hover */
+      color: #FFFFFF;
+    }
+
+    
+    /* Header & Menu */
+    .header {
+      position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+      display: flex; justify-content: center; align-items: center;
+      background: transparent;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      border-bottom: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      padding: 0 1.5rem;
+    }
+    .header-logo {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 1.25rem; font-weight: 700; letter-spacing: 0.1em;
+      color: #FFFFFF; text-decoration: none;
+    }
+    .header-logo-img { width: 24px; height: 24px; object-fit: contain; }
+    
+    .hamburger {
+      position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; display: flex; flex-direction: column; justify-content: space-between;
+      z-index: 1001;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: #FFFFFF;
+      transition: all 0.3s ease; border-radius: 2px;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    .fullscreen-menu {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(15, 23, 42, 0.98);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      z-index: 999;
+      opacity: 0; visibility: hidden; transition: all 0.4s ease;
+    }
+    .fullscreen-menu.open { opacity: 1; visibility: visible; }
+    .menu-list { list-style: none; text-align: center; }
+    .menu-item { margin-bottom: 2.5rem; }
+    .menu-link {
+      font-size: 1.3rem; font-weight: 600; color: #FFFFFF; text-decoration: none;
+      letter-spacing: 0.05em; transition: color 0.3s ease;
+    }
+    .menu-link:hover { color: var(--color-accent); }
+
+    @media (min-width: 768px) {
+      .header { justify-content: flex-start; }
+      .header-logo { margin-left: 1rem; }
+    }
+
+    
+    .header.scrolled {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+/* Hero */
+
+    .hero-slideshow, .hero-slide, .hero-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    }
+    .hero-slideshow { z-index: 0; }
+    .hero-slide {
+      background-size: cover; background-position: center; opacity: 0;
+      animation: heroZoomFade 18s infinite linear; 
+    }
+    /* 3 images, 18s total. Each is visible for 6s. 
+       Fade in over 1.5s, hold for 4.5s, fade out over 1.5s */
+    .hero-slide:nth-child(1) { background-image: url('assets/images/hero_swim_3.png'); animation-delay: 0s; }
+    .hero-slide:nth-child(2) { background-image: url('assets/images/recode_hero_bg2.jpg'); animation-delay: 6s; }
+    .hero-slide:nth-child(3) { background-image: url('assets/images/recode_hero_bg1.jpg'); animation-delay: 12s; }
+
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(15,23,42,0.5) 0%, rgba(2,132,199,0.4) 100%);
+      z-index: 1;
+      pointer-events: none; /* so it doesn't block clicks if any */
+    }
+
+    @keyframes heroZoomFade {
+      0% { opacity: 0; transform: scale(1.0); }
+      8% { opacity: 1; }
+      33% { opacity: 1; }
+      41% { opacity: 0; transform: scale(1.1); }
+      100% { opacity: 0; transform: scale(1.1); }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding-bottom: 3rem;
+      padding-top: 70px;
+      background: linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(2,132,199,0.75) 100%), url('assets/images/hero_swim_3.png') center/cover no-repeat;
+      clip-path: none;
+    }
+
+
+    .hero-logo {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 1.4rem; font-weight: 700; letter-spacing: 0.1em;
+      margin-bottom: 2.5rem; color: var(--color-heading);
+      position: relative;
+    }
+    .hero-logo-img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+
+    .hero-catch {
+      font-size: 2.8rem; margin-bottom: 1.5rem; line-height: 1.3; color: #FFFFFF;
+    }
+    .hero-catch span { color: var(--color-accent); }
+
+    .hero-sub {
+      font-size: 1.15rem; margin-bottom: 2.5rem; color: #E2E8F0; font-weight: 500;
+      line-height: 1.8;
+    }
+
+    /* Cards */
+    .grid-cards {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem;
+    }
+    @media (min-width: 768px) { .grid-cards { grid-template-columns: repeat(2, 1fr); gap: 2rem; } }
+
+    .sport-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      padding: 2.5rem 2rem;
+      border-radius: 12px; /* Soft rounded corners */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      position: relative;
+      transition: all 0.3s ease;
+      z-index: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .sport-card::before {
+      content: none;
+    }
+    .sport-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.06); border-color: var(--color-accent-light); }
+
+    .sport-card h3 { color: var(--color-heading); font-size: 1.25rem; margin-bottom: 1rem; }
+    .sport-card p { margin: 0; color: var(--color-secondary); }
+
+    /* Features / Flow */
+    .flow-list { display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: 0 auto; }
+    
+    .flow-card.flow-active { border-left-color: var(--color-accent); }
+    .flow-step { font-weight: 600; color: var(--color-accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .flow-title { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--color-heading); }
+    
+    
+    .flow-card {
+      background: #FFFFFF; padding: 2.5rem 2.5rem;
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      display: flex; flex-direction: column;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .flow-card:hover {
+      transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      border-left-color: var(--color-accent);
+    }
+    .flow-card-more {
+      align-self: flex-start;
+      color: var(--color-accent); font-size: 0.95rem; font-weight: 600;
+      margin-top: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--color-accent-light);
+      padding: 0.4rem 1rem; border-radius: 50px; transition: all 0.3s ease;
+    }
+    .flow-card:hover .flow-card-more { background: var(--color-accent); color: #FFF; }
+/* Pricing */
+    .pricing-card {
+      background: #FFFFFF;
+      padding: 2.5rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      text-align: center;
+      position: relative;
+      border-top: 4px solid var(--color-accent);
+    }
+    .pricing-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .pricing-price { font-size: 2.2rem; font-weight: 700; color: var(--color-accent); margin: 1.5rem 0; }
+    .pricing-price span { font-size: 1rem; color: var(--color-secondary); font-weight: 500; }
+    
+    /* Remove Carbon Theme variants */
+    .bg-carbon .sport-card, .bg-carbon .pricing-card, .bg-carbon 
+    .bg-carbon .sport-card h3, .bg-carbon .flow-title, .bg-carbon .pricing-card h3 { color: var(--color-heading); }
+    .bg-carbon .pricing-price { color: var(--color-accent); }
+    .bg-carbon .sport-card p, .bg-carbon .flow-desc { color: var(--color-secondary); }
+
+    
+    /* Modal */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+      z-index: 2000; display: flex; justify-content: center; align-items: center;
+      opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1.5rem;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal-content {
+      background: #FFFFFF; width: 100%; max-width: 600px;
+      border-radius: 16px; padding: 3rem 2.5rem;
+      position: relative; transform: translateY(20px); transition: all 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-overlay.open .modal-content { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: var(--color-bg-alt); border: none; width: 36px; height: 36px; border-radius: 50%;
+      font-size: 1.2rem; color: var(--color-secondary); display: flex; justify-content: center; align-items: center;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .modal-close:hover { background: #E2E8F0; color: var(--color-heading); }
+    .modal-title { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-heading); border-bottom: 2px solid var(--color-accent-light); padding-bottom: 0.8rem; }
+    .modal-body { color: var(--color-text-main); line-height: 1.8; font-size: 1rem; }
+    .modal-body p { margin-bottom: 1.2rem; }
+/* Cinema / Image Grid */
+    .cinema-slider-container {
+      max-width: 600px;
+      margin: 2.5rem auto 0;
+      position: relative;
+    }
+
+    .cinema-card-wrapper {
+      width: 100%;
+      aspect-ratio: 1672 / 941;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .cinema-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      z-index: 1;
+    }
+
+    .cinema-slide.active { opacity: 1; z-index: 2; }
+    
+    
+
+    
+    
+    
+    
+
+    
+    .cinema-nav {
+      display: flex; justify-content: center; align-items: center; margin-top: 2.5rem; gap: 0.8rem; flex-wrap: wrap;
+    }
+    .cinema-nav-btn {
+      background: var(--color-bg-alt); border: 1px solid var(--color-border);
+      color: var(--color-secondary); cursor: pointer; padding: 0.6rem 1.2rem;
+      border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease;
+      flex-direction: row; /* reset from column */
+    }
+    .cinema-nav-btn:hover { background: #E2E8F0; }
+    .cinema-nav-btn.active {
+      background: var(--color-accent); border-color: var(--color-accent);
+      color: #FFFFFF; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+    .nav-num { font-size: 0.85rem; font-weight: 700; opacity: 0.9; }
+    .nav-text { font-size: 0.95rem; font-weight: 600; }
+    .cinema-nav-divider { display: none; }
+
+    .bg-wall { background: #334155; } /* Dark slate background to make post-its pop */
+    .bg-wall h2 { color: #FFFFFF; }
+    .bg-wall p { color: #CBD5E1; }
+
+    .voice-card {
+      background: #FFFBEB; /* soft post-it yellow */
+      color: #334155;
+      padding: 2.5rem 2rem;
+      border-radius: 2px;
+      box-shadow: 2px 8px 20px rgba(0,0,0,0.15);
+      position: relative;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      display: flex; flex-direction: column;
+    }
+    .voice-card::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 70px;
+      height: 25px;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      backdrop-filter: blur(2px);
+      z-index: 2;
+    }
+    .voice-card:nth-child(odd) {
+      transform: rotate(-2deg);
+    }
+    .voice-card:nth-child(even) {
+      transform: rotate(1.5deg);
+    }
+    .voice-card:hover {
+      transform: translateY(-5px) rotate(0deg);
+      box-shadow: 4px 12px 24px rgba(0,0,0,0.2);
+    }
+    .voice-card-title {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.5; color: #0F172A;
+    }
+    .voice-text {
+      line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem; color: #334155; flex-grow: 1;
+    }
+    .voice-meta {
+      font-size: 0.85rem; font-weight: 600; color: #64748B; text-align: right; margin-top: auto;
+    }
+
+
+    .emotion-icon {
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+
+    .about-section-dark {
+      position: relative;
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .about-section-dark::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to right, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.4) 100%), url('assets/images/recode_watch_bg.png') center/cover no-repeat;
+      z-index: 0;
+      opacity: 0.8;
+      filter: grayscale(30%);
+    }
+    .about-section-dark .container {
+      position: relative; z-index: 1;
+    }
+    .about-section-dark h2 {
+      color: #FFFFFF;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    .about-section-dark p {
+      color: #E2E8F0;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      font-weight: 500;
+      font-size: 1.15rem !important; /* Slightly larger for readability */
+    }
+    .about-section-dark .highlight {
+      background: transparent;
+      color: #38BDF8; /* bright neon blue for dark mode */
+      font-weight: 700;
+    }
+
+
+    /* Modern Profile Section */
+    .profile-modern-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      background: #FFFFFF;
+      padding: 3rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+      margin-top: 2rem;
+    }
+    @media (min-width: 768px) {
+      .profile-modern-container {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 4rem;
+        gap: 5rem;
+      }
+      .profile-identity {
+        position: sticky;
+        top: 100px;
+      }
+    }
+    .profile-identity {
+      flex: 1;
+      text-align: center;
+    }
+    .profile-photo-wrapper {
+      margin: 0 auto 1.5rem;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      border: 6px solid #FFFFFF;
+      position: relative;
+    }
+    .profile-photo-main {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05); /* Slight zoom for premium feel */
+    }
+    .profile-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-heading);
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.05em;
+    }
+    .profile-name-en {
+      font-size: 0.85rem;
+      color: var(--color-accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .profile-title {
+      font-weight: 700;
+      color: var(--color-secondary);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      background: #F1F5F9;
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+    }
+    .profile-caption {
+      font-size: 0.8rem;
+      color: #94A3B8;
+      margin-top: 1rem;
+    }
+    
+    .profile-story {
+      flex: 1.8;
+    }
+    .profile-story p {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: #334155;
+      margin-bottom: 3.5rem;
+      text-align: left;
+    }
+    
+    .polaroid-wrapper {
+      background: #FFFFFF;
+      padding: 0.8rem 0.8rem 3rem 0.8rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transform: rotate(2deg);
+      max-width: 340px;
+      margin: 0 auto;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .polaroid-wrapper:hover {
+      transform: rotate(0deg) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+    .polaroid-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: sepia(20%) contrast(110%);
+    }
+    .polaroid-caption {
+      text-align: center;
+      font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", sans-serif;
+      position: relative;
+      top: 1.2rem;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+/* Footer */
+    footer {
+      background: var(--color-bg-base); color: var(--color-secondary); text-align: center; padding: 3rem 0;
+      border-top: 1px solid var(--color-border);
+      clip-path: none; margin-top: 0;
+    }
+
+    @media (min-width: 768px) {
+      h2 { font-size: 2.4rem; }
+      .hero-catch { font-size: 3.5rem; }
+      .btn { max-width: 280px; }
+    }
+  
+    .line-cta-btn {
+      background: #06C755 !important; /* LINE Green */
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3) !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 50px !important;
+      white-space: nowrap !important;
+      width: max-content !important;
+      padding: 1rem 2rem !important;
+    }
+    .line-cta-btn:hover {
+      background: #05B34C !important;
+      box-shadow: 0 6px 16px rgba(6, 199, 85, 0.4) !important;
+      transform: translateY(-2px);
+    }
+    .line-cta-btn i {
+      font-size: 1.4rem;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="header-logo">
+      <img src="assets/images/recode_logo_mark_white_transparent.png" alt="RECODE" class="header-logo-img">
+      <span>RECODE</span>
+    </a>
+    <button class="hamburger" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Fullscreen Menu -->
+  <nav class="fullscreen-menu" id="fs-menu">
+    <ul class="menu-list">
+      <li class="menu-item"><a href="#about" class="menu-link">RECODEとは</a></li>
+      <li class="menu-item"><a href="#features" class="menu-link">サービスの特徴</a></li>
+      <li class="menu-item"><a href="#pricing" class="menu-link">料金プラン</a></li>
+      <li class="menu-item"><a href="#flow" class="menu-link">ご相談からの流れ</a></li>
+      <li class="menu-item"><a href="#faq" class="menu-link">よくあるご質問</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- 1. ファーストビュー -->
+  <section class="hero">
+    <div class="hero-slideshow">
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+    </div>
+    <div class="hero-overlay"></div>
+
+    
+    <div class="container" style="text-align: left;">
+      
+
+      <h1 class="hero-catch" style="color: #FFFFFF; font-size: 2.5rem; line-height: 1.3; margin-bottom: 1rem; text-align: left;">
+        あなただけの<br>
+        パフォーマンス設計を<br>
+        アドバイザーと作る。
+      </h1>
+
+      <p class="hero-sub" style="color: #E2E8F0; font-weight: 500; line-height: 1.5; font-size: 0.95rem; border-left: none; padding-left: 0; text-align: left;">
+        現在地から目標までの練習設計図をアドバイザーと共につくるサービス。<br>
+        限られた時間の中で、今やるべき積み上げ方を整えます。
+      </p>
+
+      <div style="margin-top: 1rem;">
+        <!-- 
+          【LINE公式アカウント URL設定箇所 1】
+          以下の href の "#" を、LINE公式アカウントのURL（例: https://lin.ee/xxxxxxx）に差し替えてください。
+          ※すべてのLINEボタンはこのURLに統一します。
+        -->
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn line-cta-btn"><i class="fab fa-line"></i> LINEで現在地を相談する</a>
+        <div style="font-size: 12px; color: #FFFFFF; line-height: 1.4; margin-top: 0.8rem; letter-spacing: 0.05em; opacity: 0.9;">
+          まずは現在地の整理から。<br>いきなり申し込みでなくても大丈夫です。
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 1.6 RECODEの流れ図解 -->
+  <section class="bg-alt-light">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 1rem;">パフォーマンス設計の流れ</h2>
+      <p class="text-center"
+        >
+        目標と現在地を線で結び、ログを活かして週ごとに調整しながら積み上げます。
+      </p>
+
+      <div class="cinema-slider-container">
+        <div class="cinema-card-wrapper">
+          <!-- STEP 1 -->
+          <div class="cinema-slide active" style="background-image: url('assets/images/recode_step01_goal.png');"></div>
+
+          <!-- STEP 2 -->
+          <div class="cinema-slide" style="background-image: url('assets/images/recode_step02_current.png');"></div>
+
+          <!-- STEP 3 -->
+          <div class="cinema-slide" style="background-image: url('assets/images/recode_step03_blueprint.png');"></div>
+
+          <!-- STEP 4 -->
+          <div class="cinema-slide" style="background-image: url('assets/images/recode_step04_action.png');"></div>
+
+          <!-- STEP 5 -->
+          <div class="cinema-slide" style="background-image: url('assets/images/recode_step05_adjust.png');"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="cinema-nav">
+          <button class="cinema-nav-btn active" data-index="0"><span class="nav-num">01</span><span class="nav-text">目標</span></button>
+          <span class="cinema-nav-divider"></span>
+          <button class="cinema-nav-btn" data-index="1"><span class="nav-num">02</span><span class="nav-text">現在地</span></button>
+          <span class="cinema-nav-divider"></span>
+          <button class="cinema-nav-btn" data-index="2"><span class="nav-num">03</span><span class="nav-text">設計図</span></button>
+          <span class="cinema-nav-divider"></span>
+          <button class="cinema-nav-btn" data-index="3"><span class="nav-num">04</span><span class="nav-text">実施</span></button>
+          <span class="cinema-nav-divider"></span>
+          <button class="cinema-nav-btn" data-index="4"><span class="nav-num">05</span><span class="nav-text">調整</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- お客様の声 -->
+  <section class="bg-wall">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 1rem;">RECODEを受けた方の声</h2>
+      <p class="text-center" >
+        <span class="ib">練習量を増やすことより、</span><span class="nowrap">何を意識して積み上げるか</span>。<br>
+        <span class="ib">RECODEを通して生まれた変化の一部です。</span>
+      </p>
+
+      <div class="grid-cards">
+        <!-- Voice 1 -->
+        <div class="voice-card">
+          <h3 class="voice-card-title">一人でも、目的を持って練習できるようになった</h3>
+          <div class="voice-text">毎回のテーマや次への課題があることで、<span class="nowrap">目的を持って練習</span>に取り組みやすくなりました。<br><br>ログを送るたびにアドバイスをもらえ、客観的に自分の状態を見られるようになったため、無理をする前に調整できるようになったのが大きな変化です。</div>
+          <div class="voice-meta">
+            <span>60代女性｜トライアスロン</span>
+          </div>
+        </div>
+
+        <!-- Voice 2 -->
+        <div class="voice-card">
+          <h3 class="voice-card-title">頑張りすぎる練習から、身体と向き合う練習へ</h3>
+          <div class="voice-text">以前は「もっと頑張らないと」と考えすぎていましたが、やり切ることよりも良い感覚を守ることの大切さに気づきました。<br><br>タイムだけでなく、力みなどの反応にも目を向けられるようになり、<span class="nowrap">身体と向き合う練習</span>へと変わりつつあります。</div>
+          <div class="voice-meta">
+            <span>60代女性｜成人スイマー</span>
+          </div>
+        </div>
+      </div>
+      
+      <p class="text-center" style="font-size: 0.75rem; margin-top: 3rem; opacity: 0.7;">
+        ※掲載内容は、個人が特定されないよう一部編集しています。
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. こんな方へ -->
+  <section class="bg-carbon">
+    <div class="container">
+      <h2>こんな方へ</h2>
+      
+      <div class="grid-cards">
+        <div class="sport-card">
+          
+          <i class="fas fa-compass emotion-icon"></i>
+          <h3 class="emotion-title">一人練習で優先順位に迷う方</h3>
+          <p class="emotion-desc">一人で練習していて、何を優先すればいいか迷っている方。</p>
+        </div>
+
+        <div class="sport-card">
+          
+          <i class="fas fa-bullseye emotion-icon"></i>
+          <h3 class="emotion-title">目標から逆算して設計したい方</h3>
+          <p class="emotion-desc">大会や記録に向けて、目標から逆算して練習したい方。</p>
+        </div>
+
+        <div class="sport-card">
+          
+          <i class="fas fa-swimmer emotion-icon"></i>
+          <h3 class="emotion-title">身体と向き合い長く泳ぎたい方</h3>
+          <p class="emotion-desc">40代以降も、身体と向き合いながら泳ぎ続けたい方。</p>
+        </div>
+
+        <div class="sport-card">
+          
+          <i class="fas fa-chart-line emotion-icon"></i>
+          <h3 class="emotion-title">振り返りながら積み上げたい方</h3>
+          <p class="emotion-desc">練習量を増やすだけでなく、振り返りながら積み上げたい方。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. RECODEとは -->
+  <section class="about-section-dark" id="about">
+    <div class="container">
+      <h2>RECODEとは</h2>
+      <div class="about-wrapper" style="display: block; text-align: center; max-width: 620px; margin: 0 auto;">
+        <p style="font-size: 1rem; line-height: 1.8; margin-bottom: 0;">
+          <span class="ib">RECODEは、</span><span class="highlight nowrap">フォーム添削ではなく、</span><br>
+          <span class="ib">練習設計を提供するサポートです。</span><br><br>
+          <span class="ib">目標・現在地・練習環境を整理し、</span><br>
+          <span class="ib">限られた時間の中で</span><span class="highlight nowrap">何を優先して積み上げるか</span>を<br>
+          <span class="ib">一緒に明確にしていきます。</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. サービスの特徴 -->
+  <section class="bg-alt" id="features">
+    <div class="container">
+      <h2>サービスの特徴</h2>
+
+      
+      <style>
+        @media (min-width: 768px) {
+          #features .grid-cards { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        }
+        .feature-panel {
+          background: #FFFFFF;
+          border: 1px solid var(--color-border);
+          padding: 2.5rem 1.5rem;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 1.2rem;
+          transition: all 0.3s ease;
+        }
+        .feature-panel:hover {
+          transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+          border-color: var(--color-accent-light);
+        }
+        .feature-panel h3 { font-size: 1.15rem; color: var(--color-heading); margin: 0; line-height: 1.5; font-weight: 700; }
+        .feature-panel i { font-size: 2.5rem; color: var(--color-accent); }
+        .anti-note {
+          width: 100%;
+          text-align: center;
+          margin-top: 3.5rem;
+          padding: 1.5rem;
+          background: #F8FAFC;
+          border: 1px solid #E2E8F0;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          color: var(--color-secondary);
+          line-height: 1.6;
+        }
+      </style>
+      <div class="grid-cards">
+        <div class="feature-panel">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>現在地と<br>課題の整理</h3>
+        </div>
+        <div class="feature-panel">
+          <i class="fas fa-drafting-compass"></i>
+          <h3>練習メニューの<br>設計</h3>
+        </div>
+        <div class="feature-panel">
+          <i class="fas fa-sliders-h"></i>
+          <h3>練習ログを<br>活かした調整</h3>
+        </div>
+      </div>
+      
+      <div class="anti-note">
+        ※ RECODEは「短期間での結果保証」「細かなフォーム修正だけを目的にした指導」「何度も動画添削を繰り返すこと」を主目的にはしていません。<br class="pc-only">目標と現在地から、練習の優先順位と積み上げ方を整理するサービスです。
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Pricing (サポート内容と料金の目安) -->
+  <section class="bg-alt" id="pricing">
+    <div class="container">
+      <h2>サポート内容と料金の目安</h2>
+      <p class="text-center" >
+        <span class="ib">RECODEは、目標・現在地・練習環境に合わせて、</span><br class="sp-only">
+        <span class="ib">進め方を整理する</span><span class="ib">相談型の練習設計サポートです。</span><br><br>
+        <span class="ib">まずはLINEで現在地を整理したうえで、</span><br class="sp-only">
+        <span class="ib">必要に応じて合うプランを</span><span class="ib">ご案内します。</span>
+      </p>
+
+      <div class="pricing-list">
+        
+        <!-- 1. まず整理する -->
+        <div class="pricing-group">
+          <div class="pricing-group-label">1. まず整理する</div>
+          <div class="pricing-card">
+            <h3 class="pricing-title">目標逆算スイム設計相談</h3>
+            <div class="pricing-price">6,600円</div>
+            <p class="pricing-desc">現在地・目標・練習環境を整理し、今やるべきことを明確にする単発相談です。</p>
+            
+            <details class="pricing-details">
+              <summary>
+                <span class="summary-closed">内容を見る</span>
+                <span class="summary-open">閉じる</span>
+              </summary>
+              <div class="pricing-details-content">
+                <p style="margin-bottom: 0.5rem;"><span >向いている方：</span>現在地の把握と、優先課題の整理だけを希望する方。</p>
+                <p><span >補足：</span>オンラインヒアリングをもとに、1回完結でアドバイスします。</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 2. 4週間で整える -->
+        <div class="pricing-group">
+          <div class="pricing-group-label">2. 4週間で整える</div>
+          <div class="pricing-card">
+            <p class="pricing-desc" style="margin-bottom: 1.5rem;">次の4週間で練習の方向性、メニュー、振り返りを整えるサポートです。</p>
+            
+            <div class="pricing-tier-grid">
+              <div class="pricing-tier">
+                <h4 class="pricing-tier-name">ライト</h4>
+                <div class="pricing-price">19,800円</div>
+              </div>
+              <div class="pricing-tier">
+                <h4 class="pricing-tier-name">スタンダード</h4>
+                <div class="pricing-price">29,800円</div>
+              </div>
+              <div class="pricing-tier">
+                <h4 class="pricing-tier-name">プレミアム</h4>
+                <div class="pricing-price">39,800円</div>
+              </div>
+            </div>
+
+            <details class="pricing-details">
+              <summary>
+                <span class="summary-closed">内容を見る</span>
+                <span class="summary-open">閉じる</span>
+              </summary>
+              <div class="pricing-details-content">
+                <p style="margin-bottom: 0.5rem;"><span >ライト：</span> 方向性の提示と週1回の振り返りのみ（自走できる方向け）</p>
+                <p style="margin-bottom: 0.5rem;"><span >スタンダード：</span> メニュー調整と定期フィードバック（基本プラン）</p>
+                <p><span >プレミアム：</span> 密なコミュニケーションと細やかなメニュー調整</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+        <!-- 3. 大会から逆算する -->
+        <div class="pricing-group">
+          <div class="pricing-group-label">3. 大会から逆算する</div>
+          <div class="pricing-card">
+            <h3 class="pricing-title">3ヶ月レース逆算サポート</h3>
+            <div class="pricing-price">28,000円/月 × 3ヶ月<br class="sp-only"><span >(または 一括 84,000円)</span></div>
+            <p class="pricing-desc">大会日程が明確な方に向けて、レースまでの流れを3ヶ月単位で逆算して整えるサポートです。</p>
+
+            <details class="pricing-details">
+              <summary>
+                <span class="summary-closed">内容を見る</span>
+                <span class="summary-open">閉じる</span>
+              </summary>
+              <div class="pricing-details-content">
+                <p style="margin-bottom: 0.5rem;"><span >向いている方：</span>本命大会に向けて、ピーキングや長期的な練習を確実に積みたい方。</p>
+                <p><span >補足：</span>3ヶ月を通したメニュー設計と、日々のコンディションに合わせた微調整を含みます。</p>
+              </div>
+            </details>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pricing-note">
+        <p style="margin-bottom: 0;">
+          <span class="ib">どのプランが合うか分からない方は、</span><span class="ib">まずLINEでご相談ください。</span><br>
+          <span class="ib">目標・現在地・練習環境を確認したうえで、</span><span class="ib">無理のない進め方を</span><span class="ib">ご提案します。</span>
+        </p>
+        <div class="payment-note">
+          <span class="ib">お支払い方法は、ご相談後にご案内します。</span><br>
+          <span class="ib">現在は銀行振込を基本に、</span><span class="ib">今後はクレジットカード決済にも</span><span class="ib">対応できるよう準備しています。</span>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Flow (ご相談からの流れ) -->
+  <section class="bg-alt" id="flow">
+    <div class="container">
+      <h2>ご相談からの流れ</h2>
+      <p class="text-center" style="margin-bottom: 1.5rem;">
+        <span class="ib">はじめから申し込みを</span><span class="ib">前提にする必要はありません。</span><br>
+        <span class="ib">まずは今の目標と練習の迷いを整理し、</span><span class="ib">必要な場合のみ合う進め方を</span><span class="ib">ご案内します。</span><br><br>
+        <span class="ib">内容に納得いただいたうえで、</span><span class="ib">正式な申込後に</span><span class="ib">練習設計を開始します。</span>
+      </p>
+      <div class="flow-list">
+        <div class="flow-card flow-active" data-step="1">
+          <span class="flow-step">STEP 1</span>
+          <h3 class="flow-title">LINEで相談</h3>
+          <p class="flow-desc">目標や大会、今の練習状況を送る</p>
+          <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-card" data-step="2">
+          <span class="flow-step">STEP 2</span>
+          <h3 class="flow-title"><span class="highlight nowrap">現在地を整理</span></h3>
+          <p class="flow-desc">練習環境、回数、課題を一緒に確認する</p>
+          <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-card" data-step="3">
+          <span class="flow-step">STEP 3</span>
+          <h3 class="flow-title">進め方を提案</h3>
+          <p class="flow-desc">必要に応じて、合うサポート内容をご案内する</p>
+          <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-card" data-step="4">
+          <span class="flow-step">STEP 4</span>
+          <h3 class="flow-title">申込・お支払い</h3>
+          <p class="flow-desc">内容に納得したら正式に申込・お支払い</p>
+          <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-card" data-step="5">
+          <span class="flow-step">STEP 5</span>
+          <h3 class="flow-title">練習設計を開始</h3>
+          <p class="flow-desc">メニューとログをもとに、練習を積み上げる</p>
+          <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
+        </div>
+      </div>
+      <p class="flow-note text-center">
+        <span class="flow-note-main" style="display:block; margin-bottom: 0.25rem;">まずは整理だけでも大丈夫です。</span>
+        <span class="flow-note-sub">必要な場合のみ、合う進め方をご案内します。</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 中盤CTA -->
+  <section class="mid-cta-section">
+    <div class="container">
+      <div class="sport-card text-center">
+        <h3><span class="ib">迷いを減らし、</span><span class="ib">今やるべき練習を明確にするために。</span></h3>
+        <p>
+          <span class="ib">目標に向けた進め方を、</span><br class="sp-only">
+          <span class="ib">一緒に整理していきましょう。</span><br><br>
+          <span class="ib">ご相談から練習設計の開始まで、</span><br class="sp-only">
+          <span class="ib">オンラインで進められます。</span>
+        </p>
+        <div style="margin-top: 1.75rem;">
+          <!-- 
+            【LINE公式アカウント URL設定箇所 3】
+            以下の href の "#" を、LINE公式アカウントのURLに差し替えてください。
+          -->
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn line-cta-btn"><i class="fab fa-line"></i> LINEで現在地を相談する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- 7. 運営者プロフィール -->
+  <section class="bg-alt-light" id="operator">
+    <div class="container">
+      <h2>運営者</h2>
+      
+      <div class="profile-modern-container">
+        <!-- Left: Identity -->
+        <div class="profile-identity">
+          <div class="profile-photo-wrapper">
+            <img src="assets/images/recode_operator_current.png" alt="松下 典功" class="profile-photo-main">
+          </div>
+          <div class="profile-name">松下 典功</div>
+          <div class="profile-name-en">Norikatsu Matsushita</div>
+          <div class="profile-title">RECODE運営者 / マスターズスイマー</div>
+          <div class="profile-caption">2023年 世界マスターズ福岡にて</div>
+        </div>
+        
+        <!-- Right: Story -->
+        <div class="profile-story">
+          <p>
+            RECODEを運営する松下典功は、マスターズ水泳で日本一、世界大会5位入賞を経験し、現在も記録更新に挑戦している現役マスターズスイマーです。<br><br>
+            仕事と競技を両立する中で、自分自身の練習内容・食事・睡眠・ログ分析も研究対象とし、「目標から逆算した練習設計」を長年実践し続けてきました。<br><br>
+            机上の空論ではなく、限られた時間と環境の中でいかに着実に積み上げるか。<br>
+            そのリアルな葛藤と工夫を知る実践者の視点から、あなたにとって最適なパフォーマンス設計を一緒に整理します。
+          </p>
+
+          <div class="polaroid-wrapper">
+            <img src="assets/images/recode_operator_origin.jpg" alt="競技の原点" class="polaroid-img">
+            <div class="polaroid-caption">水泳は、積み上げ方を学んできた原点です。</div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- 9. FAQ -->
+  <section id="faq">
+    <div class="container">
+      <h2>よくあるご質問</h2>
+
+      <div class="faq-item">
+        <details class="faq-details">
+          <summary class="faq-summary">フォームの動画を送ることはできますか？</summary>
+          <div class="faq-a">はい。必要に応じて、現在地を整理するための参考材料として活用します。ただし、RECODEは細かなフォーム添削そのものを主目的とするサービスではありません。</div>
+        </details>
+      </div>
+
+      <div class="faq-item">
+        <details class="faq-details">
+          <summary class="faq-summary">週に何回練習できれば対象になりますか？</summary>
+          <div class="faq-a">回数に決まりはありません。週1回でも、その1回を目標につながる練習にするための組み立て方を一緒に整理します。</div>
+        </details>
+      </div>
+
+      <div class="faq-item">
+        <details class="faq-details">
+          <summary class="faq-summary">チーム練習やスクールに通っていても利用できますか？</summary>
+          <div class="faq-a">はい。チームやスクールでの練習を否定するものではありません。自分の目標に合わせて、何を補い、どう積み上げるかを整理したい方に向いています。</div>
+        </details>
+      </div>
+
+      <div class="faq-item">
+        <details class="faq-details">
+          <summary class="faq-summary">相談だけでも大丈夫ですか？</summary>
+          <div class="faq-a">はい。まずは現在地や課題を整理するだけでも構いません。必要に応じて、合う進め方をご案内します。</div>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8 & 10. CTA (LINE登録導線) -->
+  <section class="cta-section bg-alt-2">
+    <div class="container">
+      <h2>まずは、現在地の整理から。</h2>
+      <p>
+        目標や練習の迷いがある方は、<br>
+        公式LINEよりご相談ください。<br>
+        <span class="ib">今の現在地と、次に整えるべきことを</span><span class="ib">一緒に整理します。</span>
+      </p>
+      <!-- 
+        【LINE公式アカウント URL設定箇所 2】
+        以下の href の "#" を、LINE公式アカウントのURLに差し替えてください。
+      -->
+      <a href="#" target="_blank" rel="noopener noreferrer" class="btn line-cta-btn"><i class="fab fa-line"></i> LINEで現在地を相談する</a>
+      <p class="cta-note">※まずは整理だけでも大丈夫です。</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      &copy; RECODE All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Cinema Card Slider JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const slides = document.querySelectorAll('.cinema-slide');
+      const buttons = document.querySelectorAll('.cinema-nav-btn');
+      let currentIndex = 0;
+      let slideInterval;
+
+      function showSlide(index) {
+        // 全スライドを非アクティブに
+        slides.forEach(slide => slide.classList.remove('active'));
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // 指定スライドをアクティブに
+        slides[index].classList.add('active');
+        buttons[index].classList.add('active');
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        let nextIndex = (currentIndex + 1) % slides.length;
+        showSlide(nextIndex);
+      }
+
+      function startAutoplay() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000); // 5秒ごとに切り替え
+      }
+
+      // ナビゲーションボタンのクリックイベント
+      buttons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          showSlide(index);
+          startAutoplay(); // 手動切り替え時にタイマーをリセット
+        });
+      });
+
+      // 自動再生を開始
+      startAutoplay();
+    });
+  </script>
+
+
+  <!-- LINE CTA Setup -->
+  <script>
+    // 【LINE公式アカウント URL一括設定】
+    // ここに本番のLINE公式アカウントURLを設定してください。
+    const LINE_URL = "https://lin.ee/ZBRsevO"; 
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.line-cta-btn').forEach(btn => {
+        btn.href = LINE_URL;
+      });
+    });
+  </script>
+
+  <!-- Hamburger Menu Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const fsMenu = document.getElementById('fs-menu');
+      const menuLinks = document.querySelectorAll('.menu-link');
+
+      function toggleMenu() {
+        hamburgerBtn.classList.toggle('open');
+        fsMenu.classList.toggle('open');
+      }
+
+      hamburgerBtn.addEventListener('click', toggleMenu);
+
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          hamburgerBtn.classList.remove('open');
+          fsMenu.classList.remove('open');
+        });
+      });
+    });
+  </script>
+
+
+  <!-- Flow Modal -->
+  <div id="flow-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close"><i class="fas fa-times"></i></button>
+      <h3 class="modal-title" id="modal-title">STEP</h3>
+      <div class="modal-body" id="modal-body">
+        <p>ここに詳細な説明文が入ります。</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Scroll & Modal Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Header Scroll
+      const header = document.querySelector('.header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // Modal Logic
+      const modal = document.getElementById('flow-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+      const closeBtn = document.querySelector('.modal-close');
+      
+      const modalData = {
+        1: {
+          title: "STEP 1: LINEで相談",
+          content: "<p>目標や出場予定の大会、現在のタイム、練習で悩んでいることなどをLINEでお送りください。</p><p>「こんなこと相談してもいいのかな？」と思うような些細なことでも構いません。専任のアドバイザーがメッセージを確認し、現状の整理をサポートします。</p>"
+        },
+        2: {
+          title: "STEP 2: 現在地を整理",
+          content: "<p>いただいた内容をもとに、現在の練習環境や週の練習回数、フォームの課題などを一緒に確認します。</p><p>目標に対して「何が足りていないか」「どこを改善すべきか」を明確にすることで、迷いなく練習に取り組める基盤をつくります。</p>"
+        },
+        3: {
+          title: "STEP 3: 進め方を提案",
+          content: "<p>整理した課題と目標をもとに、あなたに最適なサポート内容と進め方（練習プラン作成、フォーム分析など）をご提案します。</p><p>無理にサービスをおすすめすることはありません。必要だと感じた場合のみご検討ください。</p>"
+        },
+        4: {
+          title: "STEP 4: 申込・お支払い",
+          content: "<p>ご提案したサポート内容と料金にご納得いただけましたら、正式にお申し込みとお支払いをお願いいたします。</p><p>お手続き完了後、すぐに初回のヒアリングやメニュー作成に取り掛かります。</p>"
+        },
+        5: {
+          title: "STEP 5: 練習設計を開始",
+          content: "<p>アドバイザーがあなたのための専用練習メニュー（設計図）を作成し、共有します。</p><p>日々の練習結果（ログ）を報告いただきながら、目標達成に向けて二人三脚で練習を積み上げていきます。</p>"
+        }
+      };
+
+      document.querySelectorAll('.flow-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const step = card.getAttribute('data-step');
+          if (modalData[step]) {
+            modalTitle.textContent = modalData[step].title;
+            modalBody.innerHTML = modalData[step].content;
+            modal.classList.add('open');
+          }
+        });
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('open');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('open');
+        }
+      });
+    });
+  </script>
+
+</body>
+
+
+</html>
