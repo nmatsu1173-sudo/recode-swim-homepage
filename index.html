@@ -538,6 +538,7 @@
       flex: 1;
       text-align: center;
     }
+    .profile-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 10%; }
     .profile-photo-wrapper {
       margin: 0 auto 1.5rem;
       width: 220px;
@@ -552,7 +553,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.05); /* Slight zoom for premium feel */
+      object-position: center 15%;
+      transform: scale(1.0);
     }
     .profile-name {
       font-size: 1.8rem;
@@ -659,6 +661,148 @@
       font-size: 1.4rem;
     }
 
+    /* Mobile & FAQ Adjustments */
+    @media (max-width: 767px) {
+      .pc-only { display: none !important; }
+      .sp-only { display: inline !important; }
+      
+      /* Hero typography */
+      .hero-catch { font-size: 2.0rem !important; line-height: 1.4 !important; letter-spacing: 0.02em !important; word-break: keep-all; overflow-wrap: anywhere; }
+      h2 { font-size: 1.6rem !important; line-height: 1.4 !important; word-break: keep-all; overflow-wrap: anywhere; }
+      .sp-word-break { word-break: keep-all; overflow-wrap: anywhere; }
+      
+      /* Left align body texts on SP */
+      p, .flow-note, .payment-note, .pricing-desc, .faq-a, .pricing-note, .voice-text {
+        text-align: left !important;
+      }
+      .text-center { text-align: left !important; } /* override for text paragraphs */
+      h2, h3, h4, .flow-note-main, .flow-step, .pricing-price { text-align: center !important; } /* keep headings center */
+      
+      /* Profile Photo */
+      .profile-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 10%; }
+    .profile-photo-wrapper {
+        width: 180px !important;
+        height: 180px !important;
+        margin: 0 auto 1.5rem !important;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .pc-only { display: inline-block; }
+      .sp-only { display: none; }
+    }
+
+    /* FAQ Accordion Styling */
+    .faq-details {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .faq-summary {
+      padding: 1.5rem 1.2rem;
+      font-weight: 700;
+      color: var(--color-heading);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    .faq-summary::-webkit-details-marker { display: none; }
+    /* iOS Safari fallback */
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    .faq-summary::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      transition: transform 0.3s ease;
+      font-weight: 400;
+      margin-left: 1rem;
+      flex-shrink: 0;
+    }
+    .faq-details[open] .faq-summary::after {
+      content: '−';
+    }
+    .faq-details[open] {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-color: var(--color-accent-light);
+    }
+    .faq-a {
+      padding: 1.5rem 1.2rem 1.5rem 1.2rem;
+      color: var(--color-text-main);
+      line-height: 1.8;
+      border-top: 1px dashed var(--color-border);
+      margin: 0 1.2rem;
+    }
+
+    /* Pricing Details Accordion */
+    .pricing-details { margin-top: 1rem; text-align: center; }
+    .pricing-details summary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--color-accent-light);
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      list-style: none;
+    }
+    .pricing-details summary:hover { background: #E0F2FE; color: #0369A1; }
+    .pricing-details summary::-webkit-details-marker { display: none; }
+    
+    .pricing-details .summary-open { display: none; }
+    .pricing-details[open] .summary-closed { display: none; }
+    .pricing-details[open] .summary-open { display: inline; }
+
+    .pricing-details-content {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: #F8FAFC;
+      border-left: 3px solid var(--color-accent);
+      border-radius: 4px 8px 8px 4px;
+      text-align: left;
+    }
+    .pricing-details-content h5 {
+      font-size: 1.1rem;
+      color: var(--color-heading);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .detail-item {
+      margin-bottom: 1.5rem;
+    }
+    .detail-item:last-child {
+      margin-bottom: 0;
+    }
+    .detail-title {
+      display: block;
+      color: var(--color-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    .detail-text {
+      display: block;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--color-text-main);
+    }
+    @media (max-width: 767px) {
+      .pricing-details-content {
+        padding: 1.2rem;
+      }
+    }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -904,7 +1048,7 @@
       <div class="grid-cards">
         <div class="feature-panel">
           <i class="fas fa-map-marker-alt"></i>
-          <h3>現在地と<br>課題の整理</h3>
+          <h3>目標から逆算した<br>優先順位の整理</h3>
         </div>
         <div class="feature-panel">
           <i class="fas fa-drafting-compass"></i>
@@ -927,12 +1071,11 @@
   <!-- Pricing (サポート内容と料金の目安) -->
   <section class="bg-alt" id="pricing">
     <div class="container">
-      <h2>サポート内容と料金の目安</h2>
-      <p class="text-center" >
-        <span class="ib">RECODEは、目標・現在地・練習環境に合わせて、</span><br class="sp-only">
-        <span class="ib">進め方を整理する</span><span class="ib">相談型の練習設計サポートです。</span><br><br>
-        <span class="ib">まずはLINEで現在地を整理したうえで、</span><br class="sp-only">
-        <span class="ib">必要に応じて合うプランを</span><span class="ib">ご案内します。</span>
+      <h2 class="sp-word-break">サポート内容と<span class="ib">料金の目安</span></h2>
+      <p class="text-center">
+        RECODEは、目標・現在地・練習環境に合わせて、<br class="pc-only">
+        進め方を整理する<span class="highlight">「相談型の練習設計サポート」</span>です。<br><br>
+        まずはLINEで現在地を整理したうえで、必要に応じて合うプランをご案内します。
       </p>
 
       <div class="pricing-list">
@@ -947,12 +1090,22 @@
             
             <details class="pricing-details">
               <summary>
-                <span class="summary-closed">内容を見る</span>
-                <span class="summary-open">閉じる</span>
+                <span class="summary-closed">＋ 詳細を見る</span>
+                <span class="summary-open">− 閉じる</span>
               </summary>
               <div class="pricing-details-content">
-                <p style="margin-bottom: 0.5rem;"><span >向いている方：</span>現在地の把握と、優先課題の整理だけを希望する方。</p>
-                <p><span >補足：</span>オンラインヒアリングをもとに、1回完結でアドバイスします。</p>
+                <div class="detail-item">
+                  <span class="detail-title">向いている方</span>
+                  <span class="detail-text">まず現在地・課題・優先順位を整理したい方。</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-title">進め方</span>
+                  <span class="detail-text">目標・現状・練習環境を確認し、次にやるべきことを明確にします。</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-title">調整の深さ</span>
+                  <span class="detail-text">単発整理。継続調整ではなく、方向性を決める入口です。</span>
+                </div>
               </div>
             </details>
           </div>
@@ -981,13 +1134,60 @@
 
             <details class="pricing-details">
               <summary>
-                <span class="summary-closed">内容を見る</span>
-                <span class="summary-open">閉じる</span>
+                <span class="summary-closed">＋ 詳細を見る</span>
+                <span class="summary-open">− 閉じる</span>
               </summary>
               <div class="pricing-details-content">
-                <p style="margin-bottom: 0.5rem;"><span >ライト：</span> 方向性の提示と週1回の振り返りのみ（自走できる方向け）</p>
-                <p style="margin-bottom: 0.5rem;"><span >スタンダード：</span> メニュー調整と定期フィードバック（基本プラン）</p>
-                <p><span >プレミアム：</span> 密なコミュニケーションと細やかなメニュー調整</p>
+                <!-- ライト -->
+                <div style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--color-border);">
+                  <h5>ライト</h5>
+                  <div class="detail-item">
+                    <span class="detail-title">向いている方</span>
+                    <span class="detail-text">自分で練習を進められるが、方向性が欲しい方。</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-title">進め方</span>
+                    <span class="detail-text">週ごとの大きなテーマと、実施しやすい練習メニューの方向性を提案します。</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-title">調整の深さ</span>
+                    <span class="detail-text">細かな日々の調整よりも、迷わず実行できる形を重視します。</span>
+                  </div>
+                </div>
+
+                <!-- スタンダード -->
+                <div style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--color-border);">
+                  <h5>スタンダード</h5>
+                  <div class="detail-item">
+                    <span class="detail-title">向いている方</span>
+                    <span class="detail-text">週ごとに状態を確認しながら進めたい方。</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-title">進め方</span>
+                    <span class="detail-text">練習ログをもとに状態・疲労・実施状況を確認し、次週のメニューを調整します。</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-title">調整の深さ</span>
+                    <span class="detail-text">RECODEの基本形。週単位で方向性と内容を調整します。</span>
+                  </div>
+                </div>
+
+                <!-- プレミアム -->
+                <div>
+                  <h5>プレミアム</h5>
+                  <div class="detail-item">
+                    <span class="detail-title">向いている方</span>
+                    <span class="detail-text">課題が複数あり、より丁寧に伴走してほしい方。</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-title">進め方</span>
+                    <span class="detail-text">練習内容・ログ・体調・レース準備まで見ながら、優先順位を調整します。</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-title">調整の深さ</span>
+                    <span class="detail-text">練習・疲労・不安・戦略まで、より広く深く見ます。</span>
+                  </div>
+                </div>
               </div>
             </details>
           </div>
@@ -1003,12 +1203,22 @@
 
             <details class="pricing-details">
               <summary>
-                <span class="summary-closed">内容を見る</span>
-                <span class="summary-open">閉じる</span>
+                <span class="summary-closed">＋ 詳細を見る</span>
+                <span class="summary-open">− 閉じる</span>
               </summary>
               <div class="pricing-details-content">
-                <p style="margin-bottom: 0.5rem;"><span >向いている方：</span>本命大会に向けて、ピーキングや長期的な練習を確実に積みたい方。</p>
-                <p><span >補足：</span>3ヶ月を通したメニュー設計と、日々のコンディションに合わせた微調整を含みます。</p>
+                <div class="detail-item">
+                  <span class="detail-title">向いている方</span>
+                  <span class="detail-text">大会日が明確で、8〜12週間単位で本番へ向けて整えたい方。</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-title">進め方</span>
+                  <span class="detail-text">大会日から逆算し、期間をフェーズ分けして週ごとの流れを調整します。</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-title">調整の深さ</span>
+                  <span class="detail-text">中期設計。全体設計とピーキングを重視します。</span>
+                </div>
               </div>
             </details>
           </div>
@@ -1018,12 +1228,12 @@
 
       <div class="pricing-note">
         <p style="margin-bottom: 0;">
-          <span class="ib">どのプランが合うか分からない方は、</span><span class="ib">まずLINEでご相談ください。</span><br>
-          <span class="ib">目標・現在地・練習環境を確認したうえで、</span><span class="ib">無理のない進め方を</span><span class="ib">ご提案します。</span>
+          どのプランが合うか分からない方は、まずLINEでご相談ください。<br class="pc-only">
+          目標・現在地・練習環境を確認したうえで、無理のない進め方をご提案します。
         </p>
-        <div class="payment-note">
-          <span class="ib">お支払い方法は、ご相談後にご案内します。</span><br>
-          <span class="ib">現在は銀行振込を基本に、</span><span class="ib">今後はクレジットカード決済にも</span><span class="ib">対応できるよう準備しています。</span>
+        <div class="payment-note" style="margin-top: 1.5rem;">
+          お支払い方法は、ご相談後にご案内します。<br class="pc-only">
+          現在は銀行振込を基本に、今後はクレジットカード決済にも対応できるよう準備しています。
         </div>
       </div>
 
@@ -1036,9 +1246,9 @@
     <div class="container">
       <h2>ご相談からの流れ</h2>
       <p class="text-center" style="margin-bottom: 1.5rem;">
-        <span class="ib">はじめから申し込みを</span><span class="ib">前提にする必要はありません。</span><br>
-        <span class="ib">まずは今の目標と練習の迷いを整理し、</span><span class="ib">必要な場合のみ合う進め方を</span><span class="ib">ご案内します。</span><br><br>
-        <span class="ib">内容に納得いただいたうえで、</span><span class="ib">正式な申込後に</span><span class="ib">練習設計を開始します。</span>
+        はじめから<strong>申し込みを前提にする必要はありません。</strong><br class="pc-only">
+        まずは今の目標と練習の迷いを整理し、必要な場合のみ合う進め方をご案内します。<br><br>
+        内容に納得いただいたうえで、正式な申込後に練習設計を開始します。
       </p>
       <div class="flow-list">
         <div class="flow-card flow-active" data-step="1">
@@ -1087,12 +1297,10 @@
   <section class="mid-cta-section">
     <div class="container">
       <div class="sport-card text-center">
-        <h3><span class="ib">迷いを減らし、</span><span class="ib">今やるべき練習を明確にするために。</span></h3>
+        <h3 class="sp-word-break">迷いを減らし、今やるべき練習を明確にするために。</h3>
         <p>
-          <span class="ib">目標に向けた進め方を、</span><br class="sp-only">
-          <span class="ib">一緒に整理していきましょう。</span><br><br>
-          <span class="ib">ご相談から練習設計の開始まで、</span><br class="sp-only">
-          <span class="ib">オンラインで進められます。</span>
+          目標に向けた進め方を、一緒に整理していきましょう。<br><br>
+          ご相談から練習設計の開始まで、オンラインで進められます。
         </p>
         <div style="margin-top: 1.75rem;">
           <!-- 
@@ -1118,7 +1326,7 @@
           </div>
           <div class="profile-name">松下 典功</div>
           <div class="profile-name-en">Norikatsu Matsushita</div>
-          <div class="profile-title">RECODE運営者 / マスターズスイマー</div>
+          <div class="profile-title" style="line-height: 1.5; padding: 0.6rem 1.2rem; text-align: center;">RECODE運営者<br>マスターズスイマー</div>
           <div class="profile-caption">2023年 世界マスターズ福岡にて</div>
         </div>
         
@@ -1178,20 +1386,21 @@
   </section>
 
   <!-- 8 & 10. CTA (LINE登録導線) -->
-  <section class="cta-section bg-alt-2">
-    <div class="container">
-      <h2>まずは、現在地の整理から。</h2>
-      <p>
-        目標や練習の迷いがある方は、<br>
-        公式LINEよりご相談ください。<br>
-        <span class="ib">今の現在地と、次に整えるべきことを</span><span class="ib">一緒に整理します。</span>
+  <section class="cta-section bg-alt-2" style="padding: 4rem 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="sp-word-break" style="text-align: center !important;">まずは、現在地の整理から。</h2>
+      <p style="text-align: center !important; margin-left: auto; margin-right: auto; max-width: 600px;">
+        目標や練習の迷いがある方は、公式LINEよりご相談ください。<br class="pc-only">
+        今の現在地と、次に整えるべきことを一緒に整理します。
       </p>
       <!-- 
         【LINE公式アカウント URL設定箇所 2】
         以下の href の "#" を、LINE公式アカウントのURLに差し替えてください。
       -->
-      <a href="#" target="_blank" rel="noopener noreferrer" class="btn line-cta-btn"><i class="fab fa-line"></i> LINEで現在地を相談する</a>
-      <p class="cta-note">※まずは整理だけでも大丈夫です。</p>
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn line-cta-btn"><i class="fab fa-line"></i> LINEで現在地を相談する</a>
+        <p class="cta-note" style="text-align: center !important; margin-top: 1rem;">※まずは整理だけでも大丈夫です。</p>
+      </div>
     </div>
   </section>
 
@@ -1285,7 +1494,7 @@
   <!-- Flow Modal -->
   <div id="flow-modal" class="modal-overlay">
     <div class="modal-content">
-      <button class="modal-close"><i class="fas fa-times"></i></button>
+      <button class="modal-close" style="display: none;"><i class="fas fa-times"></i></button>
       <h3 class="modal-title" id="modal-title">STEP</h3>
       <div class="modal-body" id="modal-body">
         <p>ここに詳細な説明文が入ります。</p>
@@ -1315,23 +1524,23 @@
       
       const modalData = {
         1: {
-          title: "STEP 1: LINEで相談",
+          title: "LINEで相談",
           content: "<p>目標や出場予定の大会、現在のタイム、練習で悩んでいることなどをLINEでお送りください。</p><p>「こんなこと相談してもいいのかな？」と思うような些細なことでも構いません。専任のアドバイザーがメッセージを確認し、現状の整理をサポートします。</p>"
         },
         2: {
-          title: "STEP 2: 現在地を整理",
+          title: "現在地を整理",
           content: "<p>いただいた内容をもとに、現在の練習環境や週の練習回数、フォームの課題などを一緒に確認します。</p><p>目標に対して「何が足りていないか」「どこを改善すべきか」を明確にすることで、迷いなく練習に取り組める基盤をつくります。</p>"
         },
         3: {
-          title: "STEP 3: 進め方を提案",
+          title: "進め方を提案",
           content: "<p>整理した課題と目標をもとに、あなたに最適なサポート内容と進め方（練習プラン作成、フォーム分析など）をご提案します。</p><p>無理にサービスをおすすめすることはありません。必要だと感じた場合のみご検討ください。</p>"
         },
         4: {
-          title: "STEP 4: 申込・お支払い",
+          title: "申込・お支払い",
           content: "<p>ご提案したサポート内容と料金にご納得いただけましたら、正式にお申し込みとお支払いをお願いいたします。</p><p>お手続き完了後、すぐに初回のヒアリングやメニュー作成に取り掛かります。</p>"
         },
         5: {
-          title: "STEP 5: 練習設計を開始",
+          title: "練習設計を開始",
           content: "<p>アドバイザーがあなたのための専用練習メニュー（設計図）を作成し、共有します。</p><p>日々の練習結果（ログ）を報告いただきながら、目標達成に向けて二人三脚で練習を積み上げていきます。</p>"
         }
       };
@@ -1353,6 +1562,12 @@
 
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
+          modal.classList.remove('open');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
           modal.classList.remove('open');
         }
       });
