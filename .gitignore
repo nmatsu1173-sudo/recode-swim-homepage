@@ -1,2 +1,22 @@
 .DS_Store
 Thumbs.db
+
+# Python scripts
+*.py
+
+# Backup files
+*backup*.html
+*backup*
+
+# Temporary documents
+instruction.txt
+recode_hp_plan_v1.md
+
+# Unused/Duplicate images
+assets/images/recode_logo_mark_white.png.jpeg
+assets/images/recode_step01_goal.jpg
+assets/images/recode_step02_current.jpg
+assets/images/recode_step03_blueprint.jpg
+assets/images/recode_step04_action.jpg
+assets/images/recode_step05_adjust.jpg
+assets/images/recode_logo_mark_white.png
