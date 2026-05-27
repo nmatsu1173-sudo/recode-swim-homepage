@@ -886,8 +886,7 @@
       </h1>
 
       <p class="hero-sub" style="color: #E2E8F0; font-weight: 500; line-height: 1.5; font-size: 0.95rem; border-left: none; padding-left: 0; text-align: left;">
-        現在地から目標までの練習設計図をアドバイザーと共につくるサービス。<br>
-        限られた時間の中で、今やるべき積み上げ方を整えます。
+        <span style="display: inline-block;">マスターズ水泳・</span><span style="display: inline-block;">トライアスロンスイムに向けた、</span><br class="sp-only"><span style="display: inline-block;">オンライン練習設計サポート。</span>
       </p>
 
       <div style="margin-top: 1rem;">
@@ -1101,6 +1100,171 @@
     </div>
   </section>
 
+  <!-- Comparison (一般的な水泳レッスンとの違い) -->
+  <section class="bg-light" id="comparison" style="padding: 5rem 0;">
+    <div class="container">
+      <h2 class="sp-word-break" style="text-align: center;">一般的な水泳レッスンとの違い</h2>
+      <p class="text-center" style="max-width: 100%; margin: 0 auto; line-height: 1.8;">
+        その場で泳ぎを見て修正するレッスン。<br>
+        練習の積み上げ方を整えるオンラインサポート。<br><br>
+        目標・現在地・練習環境を整理し、一人練習でも迷わず積み上げられる状態をつくります。
+      </p>
+
+      <style>
+        .diff-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 3rem;
+          background: #FFFFFF;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+        .diff-table th, .diff-table td {
+          padding: 1.5rem;
+          text-align: left;
+          border-bottom: 1px solid var(--color-border);
+          line-height: 1.5;
+        }
+        .diff-table th {
+          background-color: var(--color-background);
+          font-weight: 600;
+          color: var(--color-heading);
+          width: 25%;
+          white-space: nowrap;
+          word-break: keep-all;
+        }
+        .diff-table td:nth-child(2) {
+          width: 37.5%;
+          color: var(--color-secondary);
+        }
+        .diff-table td:nth-child(3) {
+          width: 37.5%;
+          background-color: rgba(2,132,199,0.03);
+          font-weight: 600;
+          color: var(--color-accent);
+        }
+        .diff-table tr:last-child th, .diff-table tr:last-child td {
+          border-bottom: none;
+        }
+        .diff-table-header {
+          display: none;
+        }
+        @media (min-width: 768px) {
+          .diff-table-header {
+            display: table-row;
+            background-color: var(--color-background);
+          }
+          .diff-table-header th {
+            padding: 1rem 1.5rem;
+            font-size: 0.9rem;
+            color: var(--color-secondary);
+            background-color: var(--color-background);
+          }
+        }
+        @media (max-width: 767px) {
+          .diff-table {
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            margin-top: 2rem;
+          }
+          .diff-table tbody {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+          }
+          .diff-table, .diff-table tr, .diff-table th, .diff-table td {
+            display: block;
+            width: 100%;
+          }
+          .diff-table tr {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+            overflow: hidden;
+            border-bottom: none;
+          }
+          .diff-table th {
+            background-color: transparent;
+            border-bottom: 1px solid var(--color-border);
+            padding: 1.25rem 1.5rem 1rem;
+            font-size: 1.1rem;
+            color: var(--color-heading);
+          }
+          .diff-table td {
+            border-bottom: none;
+            padding: 0.5rem 1.5rem;
+          }
+          .diff-table td:nth-child(2) {
+            padding-top: 1.25rem;
+            padding-bottom: 0.5rem;
+          }
+          .diff-table td:nth-child(2)::before {
+            content: "一般的な水泳レッスン";
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            display: block;
+            margin-bottom: 0.3rem;
+          }
+          .diff-table td:nth-child(3) {
+            padding-top: 0.5rem;
+            padding-bottom: 1.5rem;
+          }
+          .diff-table td:nth-child(3)::before {
+            content: "RECODE";
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-accent-light);
+            display: block;
+            margin-bottom: 0.3rem;
+          }
+        }
+      </style>
+
+      <table class="diff-table">
+        <tr class="diff-table-header">
+          <th>項目</th>
+          <th>一般的な水泳レッスン</th>
+          <th>RECODE</th>
+        </tr>
+        <tr>
+          <th>主な目的</th>
+          <td>その場で泳ぎを教わる</td>
+          <td>目標までの練習設計を整える</td>
+        </tr>
+        <tr>
+          <th>見るポイント</th>
+          <td>フォーム・技術修正</td>
+          <td>目標・現在地・優先順位</td>
+        </tr>
+        <tr>
+          <th>実施場所</th>
+          <td>プール現場</td>
+          <td>オンライン中心</td>
+        </tr>
+        <tr>
+          <th>サポート内容</th>
+          <td>その日の指導</td>
+          <td>メニュー設計・ログ確認・週次調整</td>
+        </tr>
+        <tr>
+          <th>向いている人</th>
+          <td>直接泳ぎを見てほしい人</td>
+          <td>一人練習を迷わず積み上げたい人</td>
+        </tr>
+        <tr>
+          <th>強み</th>
+          <td>その場で修正できる</td>
+          <td>継続的に練習を設計できる</td>
+        </tr>
+      </table>
+
+
+    </div>
+  </section>
+
 
   <!-- Pricing (サポート内容と料金の目安) -->
   <section class="bg-alt" id="pricing">
@@ -1288,35 +1452,35 @@
         <div class="flow-card flow-active" data-step="1">
           <span class="flow-step">STEP 1</span>
           <h3 class="flow-title">LINEで相談</h3>
-          <p class="flow-desc">目標や大会、今の練習状況を送る</p>
+          <p class="flow-desc">目標や出場予定の大会、現在の練習状況をお送りください。</p>
           <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
         </div>
         <div class="flow-arrow"></div>
         <div class="flow-card" data-step="2">
           <span class="flow-step">STEP 2</span>
           <h3 class="flow-title"><span class="highlight nowrap">現在地を整理</span></h3>
-          <p class="flow-desc">練習環境、回数、課題を一緒に確認する</p>
+          <p class="flow-desc">練習環境、練習回数、課題、目標までの距離を確認します。</p>
           <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
         </div>
         <div class="flow-arrow"></div>
         <div class="flow-card" data-step="3">
           <span class="flow-step">STEP 3</span>
           <h3 class="flow-title">進め方を提案</h3>
-          <p class="flow-desc">必要に応じて、合うサポート内容をご案内する</p>
+          <p class="flow-desc">目的や状況に合わせて、必要なサポート内容と進め方をご提案します。</p>
           <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
         </div>
         <div class="flow-arrow"></div>
         <div class="flow-card" data-step="4">
           <span class="flow-step">STEP 4</span>
-          <h3 class="flow-title">申込・お支払い</h3>
-          <p class="flow-desc">内容に納得したら正式に申込・お支払い</p>
+          <h3 class="flow-title">内容を確認・申込</h3>
+          <p class="flow-desc">提案内容を確認し、納得いただいた場合のみ正式にお申し込みいただきます。</p>
           <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
         </div>
         <div class="flow-arrow"></div>
         <div class="flow-card" data-step="5">
           <span class="flow-step">STEP 5</span>
           <h3 class="flow-title">練習設計を開始</h3>
-          <p class="flow-desc">メニューとログをもとに、練習を積み上げる</p>
+          <p class="flow-desc">目標に向けて、メニューとログをもとに練習を積み上げていきます。</p>
           <div class="flow-card-more">詳細を見る <i class="fas fa-chevron-right"></i></div>
         </div>
       </div>
@@ -1559,19 +1723,19 @@
       const modalData = {
         1: {
           title: "LINEで相談",
-          content: "<p>目標や出場予定の大会、現在のタイム、練習で悩んでいることなどをLINEでお送りください。</p><p>「こんなこと相談してもいいのかな？」と思うような些細なことでも構いません。専任のアドバイザーがメッセージを確認し、現状の整理をサポートします。</p>"
+          content: "<p>目標や出場予定の大会、現在の練習状況、練習で悩んでいることなどをLINEでお送りください。</p><p>「こんなこと相談してもいいのかな？」と思うような些細なことでも構いません。専任のアドバイザーがメッセージを確認し、現状の整理をサポートします。</p>"
         },
         2: {
           title: "現在地を整理",
-          content: "<p>いただいた内容をもとに、現在の練習環境や週の練習回数、フォームの課題などを一緒に確認します。</p><p>目標に対して「何が足りていないか」「どこを改善すべきか」を明確にすることで、迷いなく練習に取り組める基盤をつくります。</p>"
+          content: "<p>いただいた内容をもとに、現在の練習環境や週の練習回数、課題、目標までの距離などを一緒に確認します。</p><p>目標に対して「何が足りていないか」「どこを改善すべきか」を明確にすることで、迷いなく練習に取り組める基盤をつくります。</p>"
         },
         3: {
           title: "進め方を提案",
-          content: "<p>整理した課題と目標をもとに、あなたに最適なサポート内容と進め方（練習プラン作成、フォーム分析など）をご提案します。</p><p>無理にサービスをおすすめすることはありません。必要だと感じた場合のみご検討ください。</p>"
+          content: "<p>整理した課題と目標をもとに、目的や状況に合わせて、あなたに最適なサポート内容と進め方をご提案します。</p><p>無理にサービスをおすすめすることはありません。必要だと感じた場合のみご検討ください。</p>"
         },
         4: {
-          title: "申込・お支払い",
-          content: "<p>ご提案したサポート内容と料金にご納得いただけましたら、正式にお申し込みとお支払いをお願いいたします。</p><p>お手続き完了後、すぐに初回のヒアリングやメニュー作成に取り掛かります。</p>"
+          title: "内容を確認・申込",
+          content: "<p>ご提案したサポート内容をご確認いただき、内容に納得いただけましたら正式にお申し込みをお願いいたします。</p><p>お手続き完了後、すぐに初回のヒアリングや練習設計に取り掛かります。</p>"
         },
         5: {
           title: "練習設計を開始",
