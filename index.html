@@ -1111,6 +1111,7 @@
       </p>
 
       <style>
+        /* PC用テーブル */
         .diff-table {
           width: 100%;
           border-collapse: collapse;
@@ -1147,82 +1148,75 @@
         .diff-table tr:last-child th, .diff-table tr:last-child td {
           border-bottom: none;
         }
-        .diff-table-header {
+        .diff-table-header th {
+          background-color: var(--color-background);
+          padding: 1rem 1.5rem;
+          font-size: 0.9rem;
+          color: var(--color-secondary);
+        }
+
+        /* スマホ用カードレイアウト */
+        .diff-cards {
           display: none;
         }
-        @media (min-width: 768px) {
-          .diff-table-header {
-            display: table-row;
-            background-color: var(--color-background);
-          }
-          .diff-table-header th {
-            padding: 1rem 1.5rem;
-            font-size: 0.9rem;
-            color: var(--color-secondary);
-            background-color: var(--color-background);
-          }
-        }
+
         @media (max-width: 767px) {
           .diff-table {
-            background: transparent;
-            box-shadow: none;
-            border-radius: 0;
-            margin-top: 2rem;
+            display: none;
           }
-          .diff-table tbody {
+          .diff-cards {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
+            margin-top: 2rem;
           }
-          .diff-table, .diff-table tr, .diff-table th, .diff-table td {
-            display: block;
-            width: 100%;
-          }
-          .diff-table tr {
+          .diff-card {
             background: #FFFFFF;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.04);
             overflow: hidden;
-            border-bottom: none;
           }
-          .diff-table th {
-            background-color: transparent;
-            border-bottom: 1px solid var(--color-border);
-            padding: 1.25rem 1.5rem 1rem;
-            font-size: 1.1rem;
+          .diff-card-header {
+            background-color: var(--color-background);
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 1.05rem;
             color: var(--color-heading);
+            border-bottom: 1px solid var(--color-border);
+            text-align: center;
           }
-          .diff-table td {
-            border-bottom: none;
-            padding: 0.5rem 1.5rem;
+          .diff-card-item {
+            padding: 1.25rem 1.5rem;
           }
-          .diff-table td:nth-child(2) {
-            padding-top: 1.25rem;
-            padding-bottom: 0.5rem;
+          .diff-card-item:not(:last-child) {
+            border-bottom: 1px dashed var(--color-border);
           }
-          .diff-table td:nth-child(2)::before {
-            content: "一般的な水泳レッスン";
-            font-size: 0.8rem;
+          .diff-card-item.recode {
+            background-color: rgba(2,132,199,0.03);
+          }
+          .diff-card-label {
+            font-size: 0.85rem;
             font-weight: 600;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+          }
+          .diff-card-item:not(.recode) .diff-card-label {
             color: var(--color-secondary);
-            display: block;
-            margin-bottom: 0.3rem;
           }
-          .diff-table td:nth-child(3) {
-            padding-top: 0.5rem;
-            padding-bottom: 1.5rem;
+          .diff-card-item.recode .diff-card-label {
+            color: var(--color-accent);
           }
-          .diff-table td:nth-child(3)::before {
-            content: "RECODE";
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--color-accent-light);
-            display: block;
-            margin-bottom: 0.3rem;
+          .diff-card-value {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--color-text);
+            font-weight: 500;
           }
         }
       </style>
 
+      <!-- PC用: 比較表 -->
       <table class="diff-table">
         <tr class="diff-table-header">
           <th>項目</th>
@@ -1260,6 +1254,69 @@
           <td>継続的に練習を設計できる</td>
         </tr>
       </table>
+
+      <!-- スマホ用: 比較カード -->
+      <div class="diff-cards">
+        <div class="diff-card">
+          <div class="diff-card-header">【主な目的】</div>
+          <div class="diff-card-item">
+            <div class="diff-card-label">一般的な水泳レッスン</div>
+            <div class="diff-card-value">その場で泳ぎを教わる</div>
+          </div>
+          <div class="diff-card-item recode">
+            <div class="diff-card-label">RECODE</div>
+            <div class="diff-card-value">目標までの練習設計を整える</div>
+          </div>
+        </div>
+
+        <div class="diff-card">
+          <div class="diff-card-header">【見るポイント】</div>
+          <div class="diff-card-item">
+            <div class="diff-card-label">一般的な水泳レッスン</div>
+            <div class="diff-card-value">フォーム・技術修正</div>
+          </div>
+          <div class="diff-card-item recode">
+            <div class="diff-card-label">RECODE</div>
+            <div class="diff-card-value">目標・現在地・優先順位</div>
+          </div>
+        </div>
+
+        <div class="diff-card">
+          <div class="diff-card-header">【実施場所】</div>
+          <div class="diff-card-item">
+            <div class="diff-card-label">一般的な水泳レッスン</div>
+            <div class="diff-card-value">プール現場</div>
+          </div>
+          <div class="diff-card-item recode">
+            <div class="diff-card-label">RECODE</div>
+            <div class="diff-card-value">オンライン中心</div>
+          </div>
+        </div>
+
+        <div class="diff-card">
+          <div class="diff-card-header">【サポート内容】</div>
+          <div class="diff-card-item">
+            <div class="diff-card-label">一般的な水泳レッスン</div>
+            <div class="diff-card-value">定期的な直接指導</div>
+          </div>
+          <div class="diff-card-item recode">
+            <div class="diff-card-label">RECODE</div>
+            <div class="diff-card-value">日々の練習メニューと振り返り</div>
+          </div>
+        </div>
+
+        <div class="diff-card">
+          <div class="diff-card-header">【こんな方へ】</div>
+          <div class="diff-card-item">
+            <div class="diff-card-label">一般的な水泳レッスン</div>
+            <div class="diff-card-value">今の泳ぎを直接直してほしい方</div>
+          </div>
+          <div class="diff-card-item recode">
+            <div class="diff-card-label">RECODE</div>
+            <div class="diff-card-value">練習を一人でも迷わず積み上げたい方</div>
+          </div>
+        </div>
+      </div>
 
 
     </div>
