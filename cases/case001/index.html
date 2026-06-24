@@ -922,17 +922,29 @@
   </header>
 
   <!-- Case Article -->
-  <section style="padding: 6rem 0 4rem 0;">
+  <section class="article-section">
     <div class="container" style="max-width: 800px;">
-      <div style="margin-bottom: 3rem; text-align: center;">
-        <span style="display: inline-block; background: var(--color-accent-light); color: var(--color-accent); font-weight: 600; font-size: 0.85rem; padding: 0.4rem 1rem; border-radius: 20px; margin-bottom: 1rem;">60代女性トライアスロン選手のRECODEサポート事例</span>
-        <h1 style="font-size: 1.8rem; line-height: 1.5; color: var(--color-heading); margin-bottom: 1rem; text-align: center;">ただ泳ぐ時間から、目的のある練習へ。<br class="sp-only">3.8km完泳を見据えたスイム設計</h1>
+      <div class="article-hero">
+        <span class="article-label">60代女性トライアスロン選手のRECODEサポート事例</span>
+        <h1 class="article-h1">ただ泳ぐ時間から、目的のある練習へ。</h1>
+        <p class="article-subtitle">3.8km完泳を見据えたスイム設計</p>
       </div>
       
       <style>
+        .header { background: rgba(15, 23, 42, 0.95) !important; }
+        .hamburger { display: none !important; }
+        .article-section { padding: 8rem 0 4rem 0; }
+        .article-hero { margin-bottom: 4rem; text-align: center; }
+        .article-label {
+          display: inline-block; background: var(--color-accent-light); color: var(--color-accent); 
+          font-weight: 600; font-size: 0.85rem; padding: 0.4rem 1.2rem; border-radius: 20px; margin-bottom: 1.5rem;
+        }
+        .article-h1 { font-size: 1.8rem; line-height: 1.5; color: var(--color-heading); margin-bottom: 0; text-align: center; }
+        .article-subtitle { font-size: 1.1rem; color: var(--color-secondary); margin-top: 1rem; font-weight: 500; text-align: center; }
         .article-h2 {
           font-size: 1.4rem; color: var(--color-heading); margin: 4rem 0 1.5rem 0; 
           border-bottom: 2px solid var(--color-accent-light); padding-bottom: 0.5rem; text-align: left;
+          line-height: 1.5;
         }
         .article-p {
           line-height: 1.9; color: var(--color-text-main); font-size: 1.05rem; margin-bottom: 1.5rem; text-align: left;
@@ -944,23 +956,55 @@
         .article-quote-text {
           font-weight: 600; color: var(--color-heading); font-size: 1.1rem; line-height: 1.8; margin-bottom: 0;
         }
+
+        /* Mobile Adjustments */
+        @media (max-width: 767px) {
+          .article-section { padding: 104px 0 32px 0 !important; }
+          .article-section .container { padding: 0 24px !important; }
+          .article-hero { margin-bottom: 48px !important; text-align: left !important; }
+          .article-label { font-size: 13px !important; padding: 6px 14px !important; margin-bottom: 24px !important; text-align: left !important; }
+          .article-h1 { font-size: 25px !important; line-height: 1.55 !important; text-align: left !important; margin-bottom: 8px !important; }
+          .article-subtitle { font-size: 16px !important; margin-top: 0 !important; text-align: left !important; }
+          .article-h2 {
+            font-size: 22px !important;
+            margin: 56px 0 20px 0 !important;
+            text-align: left !important;
+          }
+          .article-p {
+            font-size: 16px !important;
+            line-height: 1.85 !important;
+            margin-bottom: 24px !important;
+          }
+          .article-quote {
+            padding: 24px !important;
+            margin: 32px 0 !important;
+          }
+          .article-quote-text {
+            font-size: 15.5px !important;
+            line-height: 1.7 !important;
+          }
+          .line-cta-btn {
+            padding: 14px 24px !important;
+            font-size: 15px !important;
+          }
+        }
       </style>
 
       <div style="line-height: 1.9; color: var(--color-text-main); font-size: 1.05rem;">
         
-        <h2 class="article-h2">1. 3.8kmスイムへの挑戦と、一人練習の迷い</h2>
+        <h2 class="article-h2">3.8kmスイムへの挑戦と、一人練習の迷い</h2>
         <p class="article-p">アイアンマンレースでの3.8kmスイム完泳を目標に日々練習を重ねていた今回のケース。距離への不安から「もっと泳がなければ」と一人でプールに通い続けていましたが、ただ距離を泳ぐだけで良いのか、日々の練習で何を優先すべきかについて迷いを感じていました。</p>
 
-        <h2 class="article-h2">2. 開始時の課題：速さではなく「脚を残す」こと</h2>
+        <h2 class="article-h2">開始時の課題：速さではなく「脚を残す」こと</h2>
         <p class="article-p">トライアスロンのスイムは単独競技ではなく、その後のバイク・ランへと続く重要な第一歩です。そのため、タイムを縮めることよりも「いかに省エネで安定して泳ぎ、脚を残すか」が重要になります。しかし、一人練習ではつい「速く泳ごう」「もっと頑張ろう」と力んでしまい、効率的な省エネスイムの感覚を掴みづらいという課題がありました。</p>
 
-        <h2 class="article-h2">3. RECODEで行ったこと：毎回の練習に「目的」を持たせる</h2>
+        <h2 class="article-h2">RECODEで行ったこと：毎回の練習に「目的」を持たせる</h2>
         <p class="article-p">まずは、距離やタイムといった結果だけを追う練習から、その日の練習で「何を意識するか」を明確にする練習設計へシフトしました。例えば、力みを取るためのドリル、姿勢を保つための意識など、ただ泳ぐ時間ではなく「目的のある練習」へと整理していきました。</p>
 
-        <h2 class="article-h2">4. 練習記録がもたらした変化</h2>
+        <h2 class="article-h2">練習記録がもたらした変化</h2>
         <p class="article-p">日々の練習記録をアドバイザーと共有することで、ご自身では気づきにくかった力みの癖や状態の変化を客観的に整理できるようになりました。これにより、「今日はこれができた」「次はここを意識しよう」と、次の練習へ向かうステップが明確になっていきました。</p>
 
-        <h2 class="article-h2">5. 本人の声</h2>
+        <h2 class="article-h2">本人の声</h2>
         <p class="article-p">約2ヶ月間のサポートを通じて、一人練習の質が大きく変わったことを実感されています。</p>
         
         <div class="article-quote">
@@ -969,10 +1013,10 @@
           <p class="article-quote-text">「ただ泳ぐだけではなく、次に何を意識するかが明確になり、無理をする前に整えながら進められるようになったことが大きな変化です。」</p>
         </div>
 
-        <h2 class="article-h2">6. このケースから見えるRECODEの価値</h2>
+        <h2 class="article-h2">このケースから見えるRECODEの価値</h2>
         <p class="article-p">トライアスロン全体を見据えた「省エネで安定したスイム」の方針が定まったことで、焦って距離を泳ぐだけの時間から、自分の状態を確認し整える「迷いのない積み上げの時間」へと変化しました。練習の目的が明確になることで、自信を持って本番への準備を進められるようになったことが、最大の成果です。</p>
 
-        <h2 class="article-h2">7. 距離や一人練習に不安を感じている方へ</h2>
+        <h2 class="article-h2">距離や一人練習に不安を感じている方へ</h2>
         <p class="article-p">長距離スイムへの不安から、思うように練習を進められず悩んでいるトライアスリートは少なくありません。<br><br>大会が近づくほど、「もっと泳がなければ」と焦ってしまうこともあります。<br><br>けれど、必要なのは、ただ泳ぐ距離を増やすだけではなく、今の泳ぎの状態を見ながら、何を意識し、どう整えるのかを整理すること。<br><br>その積み重ねが、無理なく本番のスタートラインへ向かう力になります。<br><br>RECODEでは、練習内容・身体の状態・大会までの期間を整理しながら、今何を優先すべきかを一緒に考えていきます。</p>
 
       </div>

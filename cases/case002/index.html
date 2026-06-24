@@ -922,17 +922,27 @@
   </header>
 
   <!-- Case Article -->
-  <section style="padding: 6rem 0 4rem 0;">
+  <section class="article-section">
     <div class="container" style="max-width: 800px;">
-      <div style="margin-bottom: 3rem; text-align: center;">
-        <span style="display: inline-block; background: var(--color-accent-light); color: var(--color-accent); font-weight: 600; font-size: 0.85rem; padding: 0.4rem 1rem; border-radius: 20px; margin-bottom: 1rem;">60代女性マスターズスイマーのRECODEサポート事例</span>
-        <h1 style="font-size: 1.8rem; line-height: 1.5; color: var(--color-heading); margin-bottom: 1rem; text-align: center;">タイムだけでは気づけなかった、<br class="sp-only">自分の身体との向き合い方</h1>
+      <div class="article-hero">
+        <span class="article-label">60代女性マスターズスイマーのRECODEサポート事例</span>
+        <h1 class="article-h1">タイムだけでは気づけなかった、<br class="sp-only">自分の身体との向き合い方</h1>
       </div>
       
       <style>
+        .header { background: rgba(15, 23, 42, 0.95) !important; }
+        .hamburger { display: none !important; }
+        .article-section { padding: 8rem 0 4rem 0; }
+        .article-hero { margin-bottom: 4rem; text-align: center; }
+        .article-label {
+          display: inline-block; background: var(--color-accent-light); color: var(--color-accent); 
+          font-weight: 600; font-size: 0.85rem; padding: 0.4rem 1.2rem; border-radius: 20px; margin-bottom: 1.5rem;
+        }
+        .article-h1 { font-size: 1.8rem; line-height: 1.5; color: var(--color-heading); margin-bottom: 0; text-align: center; }
         .article-h2 {
           font-size: 1.4rem; color: var(--color-heading); margin: 4rem 0 1.5rem 0; 
           border-bottom: 2px solid var(--color-accent-light); padding-bottom: 0.5rem; text-align: left;
+          line-height: 1.5;
         }
         .article-p {
           line-height: 1.9; color: var(--color-text-main); font-size: 1.05rem; margin-bottom: 1.5rem; text-align: left;
@@ -944,24 +954,55 @@
         .article-quote-text {
           font-weight: 600; color: var(--color-heading); font-size: 1.1rem; line-height: 1.8; margin-bottom: 0;
         }
+
+        /* Mobile Adjustments */
+        @media (max-width: 767px) {
+          .article-section { padding: 104px 0 32px 0 !important; }
+          .article-section .container { padding: 0 24px !important; }
+          .article-hero { margin-bottom: 48px !important; text-align: left !important; }
+          .article-label { font-size: 13px !important; padding: 6px 14px !important; margin-bottom: 24px !important; text-align: left !important; }
+          .article-h1 { font-size: 25px !important; line-height: 1.55 !important; text-align: left !important; }
+          .article-h2 {
+            font-size: 22px !important;
+            margin: 56px 0 20px 0 !important;
+            text-align: left !important;
+          }
+          .article-p {
+            font-size: 16px !important;
+            line-height: 1.85 !important;
+            margin-bottom: 24px !important;
+          }
+          .article-quote {
+            padding: 24px !important;
+            margin: 32px 0 !important;
+          }
+          .article-quote-text {
+            font-size: 15.5px !important;
+            line-height: 1.7 !important;
+          }
+          .line-cta-btn {
+            padding: 14px 24px !important;
+            font-size: 15px !important;
+          }
+        }
       </style>
 
       <div style="line-height: 1.9; color: var(--color-text-main); font-size: 1.05rem;">
         
-        <h2 class="article-h2">1. 身体に不安がある中で、大会を目指す</h2>
+        <h2 class="article-h2">身体に不安がある中で、大会を目指す</h2>
         <p class="article-p">右太もも裏の張りなど、身体への不安を抱えながらも、マスターズ水泳の大会で「50mを2本泳ぐこと」を目指していた今回のケース。年齢とともに変わる身体の感覚に戸惑いながらも、目標に向けてしっかり泳げる状態を作りたいという想いからRECODEのサポートがスタートしました。</p>
 
-        <h2 class="article-h2">2. 開始時の課題</h2>
+        <h2 class="article-h2">開始時の課題</h2>
         <p class="article-p">サポート開始当初、右太もも裏／ハムストリング周辺の張りに対する不安がある一方で、練習への向き合い方は「どれだけタイムを出せたか」「どれだけストローク数を減らせたか」といった定量的な指標や、「どれだけ頑張れたか」という根性論に偏りがちでした。そのため、思うようなタイムが出ない日や、身体への不安を感じる日にはそれを失敗と捉えてモチベーションが下がり、焦りを感じてしまうという悪循環に陥っていました。</p>
         
         <div class="article-quote">
           <p class="article-quote-text">「タイム、ストローク数では気づけなかった、大切なことを教えてもらいました。」</p>
         </div>
 
-        <h2 class="article-h2">3. RECODEで行ったこと</h2>
+        <h2 class="article-h2">RECODEで行ったこと</h2>
         <p class="article-p">まずは、タイムや距離といった結果だけを追うのではなく、その日の身体の状態に合わせて「頑張る日と整える日を分ける」練習設計へシフトしました。日々の練習記録を通じて、ハムストリング周辺の張りや違和感が強く出ない範囲で、良い感覚を守るアプローチを一緒に見つけていきました。</p>
 
-        <h2 class="article-h2">4. 転機になった言葉</h2>
+        <h2 class="article-h2">転機になった言葉</h2>
         <p class="article-p">日々のコミュニケーションの中で、タイムが出ない「調子の良くない日」に対する捉え方が大きく変わりました。</p>
         
         <div class="article-quote">
@@ -970,10 +1011,10 @@
         
         <p class="article-p">この言葉をきっかけに、調子が悪い日は無理をするのではなく、身体の反応を観察し、調整するための大切なプロセスとして受け入れられるようになりました。</p>
 
-        <h2 class="article-h2">5. 大会直前のアクシデント</h2>
+        <h2 class="article-h2">大会直前のアクシデント</h2>
         <p class="article-p">大会1週間前ごろに、自宅で腰を痛めるアクシデントがありました。それまで順調に張りが落ち着いてきていた中で、思うように練習が積めない日が発生しました。以前であれば焦って練習を取り戻そうと無理をしてしまう状況でしたが、今回は違いました。無理に取り戻すのではなく、身体の反応を見ながら今できることと良い感覚だけを繋ぐようにして本番へ向かいました。</p>
 
-        <h2 class="article-h2">6. 本人の声</h2>
+        <h2 class="article-h2">本人の声</h2>
         <p class="article-p">実際にサポートを経て、メドレーリレー背泳ぎ50mと個人50m背泳ぎを無事に泳ぎ切った後にいただいた言葉です。</p>
         
         <div class="article-quote">
@@ -982,10 +1023,10 @@
           <p class="article-quote-text">「自分を信じる気持ちが、RECODEを始めた時から、8週間過ぎた今も持ち続けられている。」</p>
         </div>
 
-        <h2 class="article-h2">7. このケースから見えるRECODEの価値</h2>
+        <h2 class="article-h2">このケースから見えるRECODEの価値</h2>
         <p class="article-p">メドレーリレーと個人の50mを2本泳ぎ切るという結果も素晴らしいですが、ご本人にとって一番大きかったのは、タイムやストローク数だけでは気づけなかった「自分自身の身体との向き合い方」を知ることができた点です。頑張りすぎることなく、調子の波や突然のアクシデントを受け入れながら自分の状態を見られるようになったことで、精神的にも余裕を持って水泳を楽しめる状態へと変化しました。</p>
 
-        <h2 class="article-h2">8. 身体に不安がありながら、大会や目標を目指す方へ</h2>
+        <h2 class="article-h2">身体に不安がありながら、大会や目標を目指す方へ</h2>
         <p class="article-p">年齢とともに身体の変化を感じたり、張りや違和感がある中で、思うように練習を進められず悩んでいる方は少なくありません。<br><br>大会や目標が近づくほど、「もっと頑張らなければ」と焦ってしまうこともあります。<br><br>けれど、必要なのは、ただ練習量を増やすことだけではありません。<br><br>今の身体の状態を見ながら、何を頑張り、何を整えるのかを整理すること。<br><br>その積み重ねが、無理なく目標へ向かう力になります。<br><br>RECODEでは、練習内容・身体の状態・目標までの期間を整理しながら、今何を優先すべきかを一緒に考えていきます。</p>
 
       </div>
