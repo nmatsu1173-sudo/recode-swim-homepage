@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RECODE｜マスターズ水泳・トライアスロン向け練習設計サポート</title>
+  <meta name="description" content="RECODEは、マスターズ水泳・成人スイマー・トライアスロンのスイムに向けたオンライン練習設計サポートです。目標・現在地・練習環境を整理し、限られた時間の中で今やるべき練習を明確にします。">
+  <link rel="canonical" href="https://recodeswim.com/">
+  <meta name="google-site-verification" content="3T4GZ9VG5nV5FSmbdHx1TONmFd8xTEfr4J8lTD9vnkg" />
+  
+  <!-- OGP -->
+  <meta property="og:title" content="RECODE｜マスターズ水泳・トライアスロン向け練習設計サポート">
+  <meta property="og:description" content="RECODEは、目標・現在地・練習環境を整理し、今やるべき練習を明確にするオンライン練習設計サポートです。">
+  <meta property="og:url" content="https://recodeswim.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://recodeswim.com/../../assets/images/recode_hero_bg1.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://recodeswim.com/",
+    "name": "RECODE",
+    "author": {
+      "@type": "Person",
+      "name": "松下典功",
+      "alternateName": "Norikatsu Matsushita"
+    }
+  }
+  </script>
+      <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      /* Color Palette (Sincere Light Theme) */
+      --color-heading: #1E293B; /* Deep Navy */
+      --color-text-main: #334155; /* Slate 700 */
+      --color-secondary: #475569; /* Slate 600 */
+      --color-accent: #0284C7; /* Sincere Swimming Blue */
+      --color-accent-light: #E0F2FE; /* Sky 100 for light backgrounds */
+      --color-primary: #FFFFFF;
+      --color-bg-base: #FFFFFF;
+      --color-bg-alt: #F8FAFC; /* Slate 50 */
+      --color-border: #E2E8F0; /* Slate 200 */
+
+      /* Typography */
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+      --line-height-base: 1.85;
+      --letter-spacing-base: 0.05em;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      overflow-x: clip;
+      width: 100%;
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: 1.05rem;
+      color: var(--color-text-main);
+      background-color: var(--color-bg-base);
+      line-height: var(--line-height-base);
+      letter-spacing: var(--letter-spacing-base);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+      width: 100%;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    .highlight {
+      font-weight: 700;
+      color: var(--color-heading);
+      background: linear-gradient(transparent 65%, var(--color-accent-light) 65%);
+      padding: 0 0.2em;
+    }
+
+    .highlight-white {
+      font-weight: 700;
+      color: var(--color-heading);
+      background: linear-gradient(transparent 65%, var(--color-accent-light) 65%);
+      padding: 0 0.2em;
+    }
+
+    @media (min-width: 768px) { .sp-only { display: none; } }
+    .ib { display: inline-block; }
+    .nowrap { display: inline-block; white-space: nowrap; }
+
+    h1, h2, h3, h4 {
+      line-height: 1.4;
+      font-weight: 700;
+      color: var(--color-heading);
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 3.5rem;
+      text-align: center;
+      position: relative;
+      letter-spacing: 0.08em;
+    }
+
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 3px;
+      background-color: var(--color-accent);
+      border-radius: 2px;
+    }
+
+    h3 { font-size: 1.35rem; margin-bottom: 1rem; }
+    p { margin-bottom: 1.5rem; color: var(--color-secondary); }
+
+    .container { width: 100%; max-width: 800px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 2; }
+    section { padding: 5rem 0; position: relative; }
+
+    /* Clean Background Sections */
+    .bg-carbon, .bg-alt-light, .bg-alt {
+      background-color: var(--color-bg-alt);
+      color: var(--color-text-main);
+      padding: 5rem 0;
+      margin: 0;
+      z-index: 1;
+      clip-path: none;
+    }
+    
+    .bg-carbon h2, .bg-alt h2, .bg-alt-light h2 { color: var(--color-heading); }
+    .bg-carbon p, .bg-alt p, .bg-alt-light p { color: var(--color-secondary); }
+
+    .text-center { text-align: center; }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      background: var(--color-accent);
+      color: #FFFFFF;
+      text-decoration: none;
+      padding: 1.25rem 2rem;
+      border-radius: 8px; /* Sincere rounded corners */
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      border: none;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.3);
+      background: #0369A1; /* Slightly darker blue on hover */
+      color: #FFFFFF;
+    }
+
+    
+    /* Header & Menu */
+    .header {
+      position: fixed; top: 0; left: 0; width: 100%; height: 70px;
+      display: flex; justify-content: center; align-items: center;
+      background: transparent;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      z-index: 1000;
+      border-bottom: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      padding: 0 1.5rem;
+    }
+    .header-logo {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 1.25rem; font-weight: 700; letter-spacing: 0.1em;
+      color: #FFFFFF; text-decoration: none;
+    }
+    .header-logo-img { width: 24px; height: 24px; object-fit: contain; }
+    
+    .hamburger {
+      position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      width: 28px; height: 20px; display: flex; flex-direction: column; justify-content: space-between;
+      z-index: 1001;
+    }
+    .hamburger span {
+      display: block; width: 100%; height: 2px; background: #FFFFFF;
+      transition: all 0.3s ease; border-radius: 2px;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    .fullscreen-menu {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(15, 23, 42, 0.98);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      z-index: 999;
+      opacity: 0; visibility: hidden; transition: all 0.4s ease;
+    }
+    .fullscreen-menu.open { opacity: 1; visibility: visible; }
+    .menu-list { list-style: none; text-align: center; }
+    .menu-item { margin-bottom: 2.5rem; }
+    .menu-link {
+      font-size: 1.3rem; font-weight: 600; color: #FFFFFF; text-decoration: none;
+      letter-spacing: 0.05em; transition: color 0.3s ease;
+    }
+    .menu-link:hover { color: var(--color-accent); }
+
+    @media (min-width: 768px) {
+      .header { justify-content: flex-start; }
+      .header-logo { margin-left: 1rem; }
+    }
+
+    
+    .header.scrolled {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+/* Hero */
+
+    .hero-slideshow, .hero-slide, .hero-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    }
+    .hero-slideshow { z-index: 0; }
+    .hero-slide {
+      background-size: cover; background-position: center; opacity: 0;
+      animation: heroZoomFade 18s infinite linear; 
+    }
+    /* 3 images, 18s total. Each is visible for 6s. 
+       Fade in over 1.5s, hold for 4.5s, fade out over 1.5s */
+    .hero-slide:nth-child(1) { background-image: url('../../assets/images/hero_swim_3.png'); animation-delay: 0s; }
+    .hero-slide:nth-child(2) { background-image: url('../../assets/images/recode_hero_bg2.jpg'); animation-delay: 6s; }
+    .hero-slide:nth-child(3) { background-image: url('../../assets/images/recode_hero_bg1.jpg'); animation-delay: 12s; }
+
+    .hero-overlay {
+      background: linear-gradient(135deg, rgba(15,23,42,0.5) 0%, rgba(2,132,199,0.4) 100%);
+      z-index: 1;
+      pointer-events: none; /* so it doesn't block clicks if any */
+    }
+
+    @keyframes heroZoomFade {
+      0% { opacity: 0; transform: scale(1.0); }
+      8% { opacity: 1; }
+      33% { opacity: 1; }
+      41% { opacity: 0; transform: scale(1.1); }
+      100% { opacity: 0; transform: scale(1.1); }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      padding-bottom: 3rem;
+      padding-top: 70px;
+      background: linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(2,132,199,0.75) 100%), url('../../assets/images/hero_swim_3.png') center/cover no-repeat;
+      clip-path: none;
+    }
+
+
+    .hero-logo {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      font-size: 1.4rem; font-weight: 700; letter-spacing: 0.1em;
+      margin-bottom: 2.5rem; color: var(--color-heading);
+      position: relative;
+    }
+    .hero-logo-img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+
+    .hero-catch {
+      font-size: 2.8rem; margin-bottom: 1.5rem; line-height: 1.3; color: #FFFFFF;
+    }
+    .hero-catch span { color: var(--color-accent); }
+
+    .hero-sub {
+      font-size: 1.15rem; margin-bottom: 2.5rem; color: #E2E8F0; font-weight: 500;
+      line-height: 1.8;
+    }
+
+    /* Cards */
+    .grid-cards {
+      display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem;
+    }
+    @media (min-width: 768px) { .grid-cards { grid-template-columns: repeat(2, 1fr); gap: 2rem; } }
+
+    .sport-card {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      padding: 2.5rem 2rem;
+      border-radius: 12px; /* Soft rounded corners */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      position: relative;
+      transition: all 0.3s ease;
+      z-index: 1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .sport-card::before {
+      content: none;
+    }
+    .sport-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.06); border-color: var(--color-accent-light); }
+
+    .sport-card h3 { color: var(--color-heading); font-size: 1.25rem; margin-bottom: 1rem; }
+    .sport-card p { margin: 0; color: var(--color-secondary); }
+
+    /* Features / Flow */
+    .flow-list { display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: 0 auto; }
+    
+    .flow-card.flow-active { border-left-color: var(--color-accent); }
+    .flow-step { font-weight: 600; color: var(--color-accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; font-size: 0.9rem; }
+    .flow-title { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--color-heading); }
+    
+    
+    .flow-card {
+      background: #FFFFFF; padding: 2.5rem 2.5rem;
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      display: flex; flex-direction: column;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .flow-card:hover {
+      transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      border-left-color: var(--color-accent);
+    }
+    .flow-card-more {
+      align-self: flex-start;
+      color: var(--color-accent); font-size: 0.95rem; font-weight: 600;
+      margin-top: 1.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--color-accent-light);
+      padding: 0.4rem 1rem; border-radius: 50px; transition: all 0.3s ease;
+    }
+    .flow-card:hover .flow-card-more { background: var(--color-accent); color: #FFF; }
+/* Pricing */
+    .pricing-card {
+      background: #FFFFFF;
+      padding: 2.5rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      text-align: center;
+      position: relative;
+      border-top: 4px solid var(--color-accent);
+    }
+    .pricing-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .pricing-price { font-size: 2.2rem; font-weight: 700; color: var(--color-accent); margin: 1.5rem 0; }
+    .pricing-price span { font-size: 1rem; color: var(--color-secondary); font-weight: 500; }
+    
+    .pricing-tier-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    @media (min-width: 768px) {
+      .pricing-tier-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        align-items: stretch;
+      }
+    }
+    .pricing-tier {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    .pricing-tier-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-heading);
+      margin-bottom: 0.5rem;
+    }
+    .pricing-tier .pricing-price {
+      font-size: 1.65rem;
+      margin: 0.8rem 0;
+    }
+    .pricing-tier.featured {
+      border: 2px solid var(--color-accent);
+      background: rgba(2, 132, 199, 0.02);
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.05);
+    }
+    .pricing-tier-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-accent);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 50px;
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Remove Carbon Theme variants */
+    .bg-carbon .sport-card, .bg-carbon .pricing-card, .bg-carbon 
+    .bg-carbon .sport-card h3, .bg-carbon .flow-title, .bg-carbon .pricing-card h3 { color: var(--color-heading); }
+    .bg-carbon .pricing-price { color: var(--color-accent); }
+    .bg-carbon .sport-card p, .bg-carbon .flow-desc { color: var(--color-secondary); }
+
+    
+    /* Modal */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+      z-index: 2000; display: flex; justify-content: center; align-items: center;
+      opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1.5rem;
+    }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal-content {
+      background: #FFFFFF; width: 100%; max-width: 600px;
+      border-radius: 16px; padding: 3rem 2.5rem;
+      position: relative; transform: translateY(20px); transition: all 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      max-height: 90vh; overflow-y: auto;
+    }
+    .modal-overlay.open .modal-content { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: var(--color-bg-alt); border: none; width: 36px; height: 36px; border-radius: 50%;
+      font-size: 1.2rem; color: var(--color-secondary); display: flex; justify-content: center; align-items: center;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .modal-close:hover { background: #E2E8F0; color: var(--color-heading); }
+    .modal-title { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-heading); border-bottom: 2px solid var(--color-accent-light); padding-bottom: 0.8rem; }
+    .modal-body { color: var(--color-text-main); line-height: 1.8; font-size: 1rem; }
+    .modal-body p { margin-bottom: 1.2rem; }
+/* Cinema / Image Grid */
+    .cinema-slider-container {
+      max-width: 600px;
+      margin: 2.5rem auto 0;
+      position: relative;
+    }
+
+    .cinema-card-wrapper {
+      width: 100%;
+      aspect-ratio: 1672 / 941;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .cinema-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+      z-index: 1;
+    }
+
+    .cinema-slide.active { opacity: 1; z-index: 2; }
+    
+    
+
+    
+    
+    
+    
+
+    
+    .cinema-nav {
+      display: flex; justify-content: center; align-items: center; margin-top: 2.5rem; gap: 0.8rem; flex-wrap: wrap;
+    }
+    .cinema-nav-btn {
+      background: var(--color-bg-alt); border: 1px solid var(--color-border);
+      color: var(--color-secondary); cursor: pointer; padding: 0.6rem 1.2rem;
+      border-radius: 50px; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease;
+      flex-direction: row; /* reset from column */
+    }
+    .cinema-nav-btn:hover { background: #E2E8F0; }
+    .cinema-nav-btn.active {
+      background: var(--color-accent); border-color: var(--color-accent);
+      color: #FFFFFF; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+    .nav-num { font-size: 0.85rem; font-weight: 700; opacity: 0.9; }
+    .nav-text { font-size: 0.95rem; font-weight: 600; }
+    .cinema-nav-divider { display: none; }
+
+    .bg-wall { background: #334155; } /* Dark slate background to make post-its pop */
+    .bg-wall h2 { color: #FFFFFF; }
+    .bg-wall p { color: #CBD5E1; }
+
+    .voice-card {
+      background: #FFFBEB; /* soft post-it yellow */
+      color: #334155;
+      padding: 2.5rem 2rem;
+      border-radius: 2px;
+      box-shadow: 2px 8px 20px rgba(0,0,0,0.15);
+      position: relative;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      display: flex; flex-direction: column;
+    }
+    .voice-card::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 70px;
+      height: 25px;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      backdrop-filter: blur(2px);
+      z-index: 2;
+    }
+    .voice-card:nth-child(odd) {
+      transform: rotate(-2deg);
+    }
+    .voice-card:nth-child(even) {
+      transform: rotate(1.5deg);
+    }
+    .voice-card:hover {
+      transform: translateY(-5px) rotate(0deg);
+      box-shadow: 4px 12px 24px rgba(0,0,0,0.2);
+    }
+    .voice-card-title {
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.5; color: #0F172A;
+    }
+    .voice-text {
+      line-height: 1.8; font-size: 0.95rem; margin-bottom: 1.5rem; color: #334155; flex-grow: 1;
+    }
+    .voice-meta {
+      font-size: 0.85rem; font-weight: 600; color: #64748B; text-align: right; margin-top: auto;
+    }
+
+
+    .emotion-icon {
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+
+    .about-section-dark {
+      position: relative;
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 6rem 0;
+      overflow: hidden;
+    }
+    .about-section-dark::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to right, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.4) 100%), url('../../assets/images/recode_watch_bg.png') center/cover no-repeat;
+      z-index: 0;
+      opacity: 0.8;
+      filter: grayscale(30%);
+    }
+    .about-section-dark .container {
+      position: relative; z-index: 1;
+    }
+    .about-section-dark h2 {
+      color: #FFFFFF;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    .about-section-dark p {
+      color: #E2E8F0;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      font-weight: 500;
+      font-size: 1.15rem !important; /* Slightly larger for readability */
+    }
+    .about-section-dark .highlight {
+      background: transparent;
+      color: #38BDF8; /* bright neon blue for dark mode */
+      font-weight: 700;
+    }
+
+
+    /* Modern Profile Section */
+    .profile-modern-container {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      background: #FFFFFF;
+      padding: 3rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+      margin-top: 2rem;
+    }
+    @media (min-width: 768px) {
+      .profile-modern-container {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 4rem;
+        gap: 5rem;
+      }
+      .profile-identity {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 100px;
+      }
+    }
+    .profile-identity {
+      flex: 1;
+      text-align: center;
+    }
+    .profile-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 10%; }
+    .profile-photo-wrapper {
+      margin: 0 auto 1.5rem;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      border: 6px solid #FFFFFF;
+      position: relative;
+    }
+    .profile-photo-main {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      transform: scale(1.0);
+    }
+    .profile-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-heading);
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.05em;
+    }
+    .profile-name-en {
+      font-size: 0.85rem;
+      color: var(--color-accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .profile-title {
+      font-weight: 700;
+      color: var(--color-secondary);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      background: #F1F5F9;
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+    }
+    .profile-caption {
+      font-size: 0.8rem;
+      color: #94A3B8;
+      margin-top: 1rem;
+    }
+    
+    .profile-story {
+      flex: 1.8;
+    }
+    .profile-story p {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: #334155;
+      margin-bottom: 3.5rem;
+      text-align: left;
+    }
+    
+    .polaroid-wrapper {
+      background: #FFFFFF;
+      padding: 0.8rem 0.8rem 3rem 0.8rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      transform: rotate(2deg);
+      max-width: 340px;
+      margin: 0 auto;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .polaroid-wrapper:hover {
+      transform: rotate(0deg) scale(1.03);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+    .polaroid-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: sepia(20%) contrast(110%);
+    }
+    .polaroid-caption {
+      text-align: center;
+      font-family: 'Zen Kaku Gothic New', "Hiragino Kaku Gothic ProN", sans-serif;
+      position: relative;
+      top: 1.2rem;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+/* Footer */
+    footer {
+      background: var(--color-bg-base); color: var(--color-secondary); text-align: center; padding: 3rem 0;
+      border-top: 1px solid var(--color-border);
+      clip-path: none; margin-top: 0;
+    }
+
+    @media (min-width: 768px) {
+      h2 { font-size: 2.4rem; }
+      .hero-catch { font-size: 3.5rem; }
+      .btn { max-width: 280px; }
+    }
+  
+    .line-cta-btn {
+      background: #06C755 !important; /* LINE Green */
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3) !important;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 50px !important;
+      white-space: nowrap !important;
+      width: max-content !important;
+      padding: 1rem 2rem !important;
+    }
+    .line-cta-btn:hover {
+      background: #05B34C !important;
+      box-shadow: 0 6px 16px rgba(6, 199, 85, 0.4) !important;
+      transform: translateY(-2px);
+    }
+    .line-cta-btn i {
+      font-size: 1.4rem;
+    }
+
+    /* Mobile & FAQ Adjustments */
+    @media (max-width: 767px) {
+      .pc-only { display: none !important; }
+      .sp-only { display: inline !important; }
+      
+      /* Hero typography */
+      .hero-catch { font-size: 2.0rem !important; line-height: 1.4 !important; letter-spacing: 0.02em !important; word-break: keep-all; overflow-wrap: anywhere; }
+      h2 { font-size: 1.6rem !important; line-height: 1.4 !important; word-break: keep-all; overflow-wrap: anywhere; }
+      .sp-word-break { word-break: keep-all; overflow-wrap: anywhere; }
+      
+      /* Left align body texts on SP */
+      p, .flow-note, .payment-note, .pricing-desc, .faq-a, .pricing-note, .voice-text {
+        text-align: left !important;
+      }
+      .text-center { text-align: left !important; } /* override for text paragraphs */
+      h2, h3, h4, .flow-note-main, .flow-step, .pricing-price { text-align: center !important; } /* keep headings center */
+      
+      /* Profile Photo */
+      .profile-photo { width: 100%; height: 100%; object-fit: cover; object-position: center 10%; }
+      .profile-photo-wrapper {
+        width: 180px !important;
+        height: 180px !important;
+        margin: 0 auto 1.5rem !important;
+      }
+      .profile-story p {
+        margin-bottom: 2rem !important;
+      }
+      .polaroid-wrapper {
+        max-width: 280px !important;
+        padding: 0.6rem 0.6rem 2.2rem 0.6rem !important;
+      }
+      .polaroid-caption {
+        top: 0.8rem !important;
+        font-size: 0.85rem !important;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .pc-only { display: inline-block; }
+      .sp-only { display: none; }
+    }
+
+    /* FAQ Accordion Styling */
+    .faq-details {
+      background: #FFFFFF;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .faq-summary {
+      padding: 1.5rem 1.2rem;
+      font-weight: 700;
+      color: var(--color-heading);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+      font-size: 1.05rem;
+      line-height: 1.5;
+    }
+    .faq-summary::-webkit-details-marker { display: none; }
+    /* iOS Safari fallback */
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    .faq-summary::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      transition: transform 0.3s ease;
+      font-weight: 400;
+      margin-left: 1rem;
+      flex-shrink: 0;
+    }
+    .faq-details[open] .faq-summary::after {
+      content: '−';
+    }
+    .faq-details[open] {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-color: var(--color-accent-light);
+    }
+    .faq-a {
+      padding: 1.5rem 1.2rem 1.5rem 1.2rem;
+      color: var(--color-text-main);
+      line-height: 1.8;
+      border-top: 1px dashed var(--color-border);
+      margin: 0 1.2rem;
+    }
+
+    /* Pricing Details Accordion */
+    .pricing-details { margin-top: 1rem; text-align: center; }
+    .pricing-details summary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.6rem 1.2rem;
+      background: var(--color-accent-light);
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      list-style: none;
+    }
+    .pricing-details summary:hover { background: #E0F2FE; color: #0369A1; }
+    .pricing-details summary::-webkit-details-marker { display: none; }
+    
+    .pricing-details .summary-open { display: none; }
+    .pricing-details[open] .summary-closed { display: none; }
+    .pricing-details[open] .summary-open { display: inline; }
+
+    .pricing-details-content {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      background: #F8FAFC;
+      border-left: 3px solid var(--color-accent);
+      border-radius: 4px 8px 8px 4px;
+      text-align: left;
+    }
+    .pricing-details-content h5 {
+      font-size: 1.1rem;
+      color: var(--color-heading);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .detail-item {
+      margin-bottom: 1.5rem;
+    }
+    .detail-item:last-child {
+      margin-bottom: 0;
+    }
+    .detail-title {
+      display: block;
+      color: var(--color-heading);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    .detail-text {
+      display: block;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--color-text-main);
+    }
+    @media (max-width: 767px) {
+      .pricing-details-content {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="../../index.html" class="header-logo">
+      <img src="../../assets/images/recode_logo_mark_white_transparent.png" alt="RECODE" class="header-logo-img">
+      <span>RECODE</span>
+    </a>
+    <button class="hamburger" id="hamburger-btn">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Case Article -->
+  <section style="padding: 6rem 0 4rem 0;">
+    <div class="container" style="max-width: 800px;">
+      <div style="margin-bottom: 3rem; text-align: center;">
+        <span style="display: inline-block; background: var(--color-accent-light); color: var(--color-accent); font-weight: 600; font-size: 0.85rem; padding: 0.4rem 1rem; border-radius: 20px; margin-bottom: 1rem;">60代女性マスターズスイマーのRECODEサポート事例</span>
+        <h1 style="font-size: 1.8rem; line-height: 1.5; color: var(--color-heading); margin-bottom: 1rem; text-align: center;">タイムだけでは気づけなかった、<br class="sp-only">自分の身体との向き合い方</h1>
+      </div>
+      
+      <style>
+        .article-h2 {
+          font-size: 1.4rem; color: var(--color-heading); margin: 4rem 0 1.5rem 0; 
+          border-bottom: 2px solid var(--color-accent-light); padding-bottom: 0.5rem; text-align: left;
+        }
+        .article-p {
+          line-height: 1.9; color: var(--color-text-main); font-size: 1.05rem; margin-bottom: 1.5rem; text-align: left;
+        }
+        .article-quote {
+          background: #F8FAFC; border-left: 4px solid var(--color-accent); padding: 1.8rem 2rem; 
+          border-radius: 0 8px 8px 0; margin: 2rem 0;
+        }
+        .article-quote-text {
+          font-weight: 600; color: var(--color-heading); font-size: 1.1rem; line-height: 1.8; margin-bottom: 0;
+        }
+      </style>
+
+      <div style="line-height: 1.9; color: var(--color-text-main); font-size: 1.05rem;">
+        
+        <h2 class="article-h2">1. 身体に不安がある中で、大会を目指す</h2>
+        <p class="article-p">右太もも裏の張りなど、身体への不安を抱えながらも、マスターズ水泳の大会で「50mを2本泳ぐこと」を目指していた今回のケース。年齢とともに変わる身体の感覚に戸惑いながらも、目標に向けてしっかり泳げる状態を作りたいという想いからRECODEのサポートがスタートしました。</p>
+
+        <h2 class="article-h2">2. 開始時の課題</h2>
+        <p class="article-p">サポート開始当初、右太もも裏／ハムストリング周辺の張りに対する不安がある一方で、練習への向き合い方は「どれだけタイムを出せたか」「どれだけストローク数を減らせたか」といった定量的な指標や、「どれだけ頑張れたか」という根性論に偏りがちでした。そのため、思うようなタイムが出ない日や、身体への不安を感じる日にはそれを失敗と捉えてモチベーションが下がり、焦りを感じてしまうという悪循環に陥っていました。</p>
+        
+        <div class="article-quote">
+          <p class="article-quote-text">「タイム、ストローク数では気づけなかった、大切なことを教えてもらいました。」</p>
+        </div>
+
+        <h2 class="article-h2">3. RECODEで行ったこと</h2>
+        <p class="article-p">まずは、タイムや距離といった結果だけを追うのではなく、その日の身体の状態に合わせて「頑張る日と整える日を分ける」練習設計へシフトしました。日々の練習記録を通じて、ハムストリング周辺の張りや違和感が強く出ない範囲で、良い感覚を守るアプローチを一緒に見つけていきました。</p>
+
+        <h2 class="article-h2">4. 転機になった言葉</h2>
+        <p class="article-p">日々のコミュニケーションの中で、タイムが出ない「調子の良くない日」に対する捉え方が大きく変わりました。</p>
+        
+        <div class="article-quote">
+          <p class="article-quote-text">「調子良く入れて、調子良く泳げた日。それも大事な日です。けれど、調子の良くない日、そんな日こそ、大事な時間、大切な気づきがあります。」</p>
+        </div>
+        
+        <p class="article-p">この言葉をきっかけに、調子が悪い日は無理をするのではなく、身体の反応を観察し、調整するための大切なプロセスとして受け入れられるようになりました。</p>
+
+        <h2 class="article-h2">5. 大会直前のアクシデント</h2>
+        <p class="article-p">大会1週間前ごろに、自宅で腰を痛めるアクシデントがありました。それまで順調に張りが落ち着いてきていた中で、思うように練習が積めない日が発生しました。以前であれば焦って練習を取り戻そうと無理をしてしまう状況でしたが、今回は違いました。無理に取り戻すのではなく、身体の反応を見ながら今できることと良い感覚だけを繋ぐようにして本番へ向かいました。</p>
+
+        <h2 class="article-h2">6. 本人の声</h2>
+        <p class="article-p">実際にサポートを経て、メドレーリレー背泳ぎ50mと個人50m背泳ぎを無事に泳ぎ切った後にいただいた言葉です。</p>
+        
+        <div class="article-quote">
+          <p class="article-quote-text" style="margin-bottom: 1.5rem;">「腰痛を抱えながらも、マスターズ水泳大会で50mを2本泳げたことです。まだ、信じられません。」</p>
+          <p class="article-quote-text" style="margin-bottom: 1.5rem;">「自分自身の身体との向き合い方です。」</p>
+          <p class="article-quote-text">「自分を信じる気持ちが、RECODEを始めた時から、8週間過ぎた今も持ち続けられている。」</p>
+        </div>
+
+        <h2 class="article-h2">7. このケースから見えるRECODEの価値</h2>
+        <p class="article-p">メドレーリレーと個人の50mを2本泳ぎ切るという結果も素晴らしいですが、ご本人にとって一番大きかったのは、タイムやストローク数だけでは気づけなかった「自分自身の身体との向き合い方」を知ることができた点です。頑張りすぎることなく、調子の波や突然のアクシデントを受け入れながら自分の状態を見られるようになったことで、精神的にも余裕を持って水泳を楽しめる状態へと変化しました。</p>
+
+        <h2 class="article-h2">8. 身体に不安がありながら、大会や目標を目指す方へ</h2>
+        <p class="article-p">年齢とともに身体の変化を感じたり、張りや違和感がある中で、思うように練習を進められず悩んでいる方は少なくありません。<br><br>大会や目標が近づくほど、「もっと頑張らなければ」と焦ってしまうこともあります。<br><br>けれど、必要なのは、ただ練習量を増やすことだけではありません。<br><br>今の身体の状態を見ながら、何を頑張り、何を整えるのかを整理すること。<br><br>その積み重ねが、無理なく目標へ向かう力になります。<br><br>RECODEでは、練習内容・身体の状態・目標までの期間を整理しながら、今何を優先すべきかを一緒に考えていきます。</p>
+
+      </div>
+      
+      <div style="text-align: center; margin-top: 5rem;">
+        <a href="../../index.html" style="color: var(--color-accent); text-decoration: none; font-weight: 600; font-size: 1.1rem;"><i class="fas fa-arrow-left"></i> トップページへ戻る</a>
+      </div>
+    </div>
+  </section>
+<!-- 8 & 10. CTA (LINE登録導線) -->
+  <section class="cta-section bg-alt-2" style="padding: 4rem 0;">
+    <div class="container" style="text-align: center;">
+      <h2 class="sp-word-break" style="text-align: center !important;">まずは、現在地の整理から。</h2>
+      <p style="text-align: center !important; margin-left: auto; margin-right: auto; max-width: 700px; line-height: 1.8;">
+        大会に向けた練習や、身体の不安との向き合い方で迷っている方は、まずは現在の状況をお聞かせください。<br><br>
+        RECODEでは、目標・練習状況・身体の状態を整理しながら、今何を優先すべきかを一緒に考えていきます。<br><br>
+        まずはLINEから、現在の状況をお聞かせください。
+      </p>
+      <!-- 
+        【LINE公式アカウント URL設定箇所 2】
+        以下の href の "#" を、LINE公式アカウントのURLに差し替えてください。
+      -->
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn line-cta-btn"><i class="fab fa-line"></i> LINEで現在地を整理する</a>
+        <p class="cta-note" style="text-align: center !important; margin-top: 1.2rem; line-height: 1.6; color: var(--color-secondary); font-size: 0.95rem;">
+          LINEでは、練習の向き合い方や、目標に向けた整え方も週1回お届けしています。<br>
+          相談前の登録だけでも大丈夫です。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 0.8rem;">
+      <p style="font-size: 0.75rem; color: var(--color-secondary); opacity: 0.8; margin: 0; line-height: 1.6; letter-spacing: 0.05em; max-width: 600px; text-align: center;">
+        RECODE Swim（リコード スイム）｜マスターズ水泳・トライアスロンスイムのためのオンライン練習設計サポート
+      </p>
+      <div style="font-size: 0.8rem; opacity: 0.6;">
+        &copy; RECODE All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cinema Card Slider JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const slides = document.querySelectorAll('.cinema-slide');
+      const buttons = document.querySelectorAll('.cinema-nav-btn');
+      let currentIndex = 0;
+      let slideInterval;
+
+      function showSlide(index) {
+        // 全スライドを非アクティブに
+        slides.forEach(slide => slide.classList.remove('active'));
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        // 指定スライドをアクティブに
+        slides[index].classList.add('active');
+        buttons[index].classList.add('active');
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        let nextIndex = (currentIndex + 1) % slides.length;
+        showSlide(nextIndex);
+      }
+
+      function startAutoplay() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000); // 5秒ごとに切り替え
+      }
+
+      // ナビゲーションボタンのクリックイベント
+      buttons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+          showSlide(index);
+          startAutoplay(); // 手動切り替え時にタイマーをリセット
+        });
+      });
+
+      // 自動再生を開始
+      startAutoplay();
+    });
+  </script>
+
+
+  <!-- LINE CTA Setup -->
+  <script>
+    // 【LINE公式アカウント URL一括設定】
+    // ここに本番のLINE公式アカウントURLを設定してください。
+    const LINE_URL = "https://lin.ee/ZBRsevO"; 
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.line-cta-btn').forEach(btn => {
+        btn.href = LINE_URL;
+      });
+    });
+  </script>
+
+  <!-- Hamburger Menu Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const fsMenu = document.getElementById('fs-menu');
+      const menuLinks = document.querySelectorAll('.menu-link');
+
+      function toggleMenu() {
+        hamburgerBtn.classList.toggle('open');
+        fsMenu.classList.toggle('open');
+      }
+
+      hamburgerBtn.addEventListener('click', toggleMenu);
+
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          hamburgerBtn.classList.remove('open');
+          fsMenu.classList.remove('open');
+        });
+      });
+    });
+  </script>
+
+
+  <!-- Flow Modal -->
+  <div id="flow-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" style="display: none;"><i class="fas fa-times"></i></button>
+      <h3 class="modal-title" id="modal-title">STEP</h3>
+      <div class="modal-body" id="modal-body">
+        <p>ここに詳細な説明文が入ります。</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Scroll & Modal Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Header Scroll
+      const header = document.querySelector('.header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      // Modal Logic
+      const modal = document.getElementById('flow-modal');
+      const modalTitle = document.getElementById('modal-title');
+      const modalBody = document.getElementById('modal-body');
+      const closeBtn = document.querySelector('.modal-close');
+      
+      const modalData = {
+        1: {
+          title: "LINEで相談",
+          content: "<p>目標や出場予定の大会、現在の練習状況、練習で悩んでいることなどをLINEでお送りください。</p><p>「こんなこと相談してもいいのかな？」と思うような些細なことでも構いません。専任のアドバイザーがメッセージを確認し、現状の整理をサポートします。</p>"
+        },
+        2: {
+          title: "現在地を整理",
+          content: "<p>いただいた内容をもとに、現在の練習環境や週の練習回数、課題、目標までの距離などを一緒に確認します。</p><p>目標に対して「何が足りていないか」「どこを改善すべきか」を明確にすることで、迷いなく練習に取り組める基盤をつくります。</p>"
+        },
+        3: {
+          title: "進め方を提案",
+          content: "<p>整理した課題と目標をもとに、目的や状況に合わせて、あなたに最適なサポート内容と進め方をご提案します。</p><p>無理にサービスをおすすめすることはありません。必要だと感じた場合のみご検討ください。</p>"
+        },
+        4: {
+          title: "内容を確認・申込",
+          content: "<p>ご提案したサポート内容をご確認いただき、内容に納得いただけましたら正式にお申し込みをお願いいたします。</p><p>お手続き完了後、すぐに初回のヒアリングや練習設計に取り掛かります。</p>"
+        },
+        5: {
+          title: "練習設計を開始",
+          content: "<p>アドバイザーがあなたのための専用練習メニュー（設計図）を作成し、共有します。</p><p>日々の練習結果（練習記録）を報告いただきながら、目標達成に向けて二人三脚で練習を積み上げていきます。</p>"
+        }
+      };
+
+      document.querySelectorAll('.flow-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const step = card.getAttribute('data-step');
+          if (modalData[step]) {
+            modalTitle.textContent = modalData[step].title;
+            modalBody.innerHTML = modalData[step].content;
+            modal.classList.add('open');
+          }
+        });
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('open');
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('open');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) {
+          modal.classList.remove('open');
+        }
+      });
+    });
+  </script>
+
+</body>
+
+
+</html>
